@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { Star, ShieldCheck, Award, Phone, ChevronDown } from "lucide-react";
+import { Star, ShieldCheck, Award, MapPin, Sparkles, ArrowRight } from "lucide-react";
 import gsap from "gsap";
-import { BRANCHES, HOME_BRAND, type BranchConfig, type BranchSlug } from "@/data/branches";
+import { HOME_BRAND, type BranchConfig } from "@/data/branches";
 
 const BADGES = [
   { icon: Star, label: "4.9/5 Google Reviews" },
@@ -12,26 +12,16 @@ const BADGES = [
   { icon: Award, label: "Trusted Care at Image Clinic" },
 ];
 
-// Aligned with the real category list in sections/services/page.tsx
-const SERVICES = [
-  "Skin Aesthetics",
-  "Anti-Ageing",
-  "Body Lab",
-  "MediFacial",
-  "Hair Restoration",
-];
-
 export default function Hero({ branch }: { branch?: BranchConfig }) {
-  const [selectedBranchSlug, setSelectedBranchSlug] = useState<BranchSlug>(branch?.slug ?? "greater-kailash");
   const activeBranch = branch ?? HOME_BRAND;
-  const CLINIC_WHATSAPP = activeBranch.whatsapp;
   const bgRef = useRef<HTMLDivElement>(null);
+  const blobARef = useRef<HTMLDivElement>(null);
+  const blobBRef = useRef<HTMLDivElement>(null);
   const eyebrowRef = useRef<HTMLParagraphElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const subRef = useRef<HTMLParagraphElement>(null);
   const badgeRefs = useRef<(HTMLDivElement | null)[]>([]);
   const actionsRef = useRef<HTMLDivElement>(null);
-  const formRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const mm = gsap.matchMedia();
@@ -54,13 +44,27 @@ export default function Hero({ branch }: { branch?: BranchConfig }) {
           { y: 0, opacity: 1, duration: 0.5, stagger: 0.08 },
           0.4
         )
-        .fromTo(actionsRef.current, { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55 }, 0.45)
-        .fromTo(
-          formRef.current,
-          { y: 24, opacity: 0, scale: 0.98 },
-          { y: 0, opacity: 1, scale: 1, duration: 0.65 },
-          0.3
-        );
+        .fromTo(actionsRef.current, { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55 }, 0.45);
+
+      // Slow, continuous liquid drift for the two background blobs.
+      gsap.to(blobARef.current, {
+        x: 40,
+        y: -30,
+        scale: 1.15,
+        duration: 9,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
+      });
+      gsap.to(blobBRef.current, {
+        x: -35,
+        y: 25,
+        scale: 1.1,
+        duration: 11,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
+      });
 
       return () => tl.kill();
     });
@@ -78,7 +82,6 @@ export default function Hero({ branch }: { branch?: BranchConfig }) {
           subRef.current,
           ...badgeRefs.current,
           actionsRef.current,
-          formRef.current,
         ],
         { opacity: 1, y: 0, scale: 1, clearProps: "transform" }
       );
@@ -116,13 +119,21 @@ export default function Hero({ branch }: { branch?: BranchConfig }) {
         className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/5 sm:from-black/50 sm:via-transparent sm:to-black/10"
       />
 
+      {/* Liquid glass blobs — soft, slowly drifting light pools that sit
+          behind a frosted-glass content panel to sell the "liquid" theme. */}
       <div
+        ref={blobARef}
         aria-hidden="true"
-        className="pointer-events-none absolute -left-24 top-1/4 h-[520px] w-[520px] rounded-full bg-gold-soft/15 blur-[130px]"
+        className="pointer-events-none absolute -left-24 top-1/4 h-[520px] w-[520px] rounded-full bg-gold-soft/20 blur-[130px]"
+      />
+      <div
+        ref={blobBRef}
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-24 bottom-0 h-[420px] w-[420px] rounded-full bg-gold/20 blur-[120px]"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-24 bottom-0 h-[420px] w-[420px] rounded-full bg-gold/15 blur-[120px]"
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[380px] w-[380px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/10 blur-[110px]"
       />
 
       {/* Film-grain texture — hidden on mobile (it just reads as visual noise
@@ -136,11 +147,10 @@ export default function Hero({ branch }: { branch?: BranchConfig }) {
         }}
       />
 
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-14 px-6 py-28 sm:px-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-10 lg:px-16">
-        <div>
+      <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center px-6 py-28 text-center sm:px-10 lg:px-16">
           <p
             ref={eyebrowRef}
-            className="mb-5 -translate-y-[18px] text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-white opacity-0"
+            className="mx-auto mb-5 inline-flex -translate-y-[18px] items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-white opacity-0 backdrop-blur-sm sm:text-xs"
           >
             {activeBranch.name}
           </p>
@@ -159,47 +169,54 @@ export default function Hero({ branch }: { branch?: BranchConfig }) {
 
           <p
             ref={subRef}
-            className="mt-6 max-w-md -translate-y-5 font-sans text-base leading-relaxed text-white/85 opacity-0 sm:text-lg"
+            className="mx-auto mt-6 max-w-md -translate-y-5 font-sans text-base leading-relaxed text-white/85 opacity-0 sm:text-lg"
           >
             At {activeBranch.name}, we combine doctor-led expertise, advanced aesthetic care,
             and personalised treatment plans to help you look and feel your best.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <a href="#booking" className="btn-pill-solid">
-              Book Consultation
-            </a>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-5">
             <a
-              href={`tel:${activeBranch.phoneTel}`}
-              className="btn-pill inline-flex items-center gap-2 border-2 border-white/25 text-white hover:border-gold-soft/60 hover:bg-white/5"
+              href="#clinics"
+              className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full bg-gradient-to-r from-gold-soft via-gold to-gold-soft bg-[length:200%_auto] px-8 py-3.5 text-sm font-semibold text-teal-darker shadow-[0_8px_30px_-8px] shadow-gold/60 transition-all duration-300 hover:scale-[1.04] hover:bg-right hover:shadow-[0_12px_40px_-6px] hover:shadow-gold/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-soft focus-visible:ring-offset-2 focus-visible:ring-offset-deep-teal sm:px-9 sm:py-4 sm:text-base"
             >
-              <Phone className="h-4 w-4" strokeWidth={2} />
-              Call Now
+              <MapPin className="h-4 w-4 shrink-0" strokeWidth={2.25} />
+              <span>Our Clinics</span>
+              <ArrowRight
+                className="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1"
+                strokeWidth={2.25}
+              />
+            </a>
+
+            <a
+              href="#services"
+              className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full border-2 border-white/30 bg-white/[0.06] px-8 py-3.5 text-sm font-semibold text-white backdrop-blur-md transition-all duration-300 hover:scale-[1.04] hover:border-gold-soft/70 hover:bg-white/15 hover:text-gold-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-deep-teal sm:px-9 sm:py-4 sm:text-base"
+            >
+              <Sparkles className="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:rotate-12" strokeWidth={2.25} />
+              <span>Our Treatments</span>
             </a>
           </div>
 
-          <div ref={actionsRef} className="mt-8 flex flex-wrap items-center gap-3 -translate-y-4 opacity-0">
+          <div
+            ref={actionsRef}
+            className="mt-8 flex flex-wrap items-center justify-center gap-3 -translate-y-4 opacity-0"
+          >
             {BADGES.map(({ icon: Icon }, i) => {
               const label = i === BADGES.length - 1 ? activeBranch.heroBadge : BADGES[i].label;
               return (
-              <div
-                key={label}
-                ref={(el) => {
-                  badgeRefs.current[i] = el;
-                }}
-                className="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[13px] text-white/90 backdrop-blur-sm sm:text-sm"
-              >
-                <Icon className="h-4 w-4 shrink-0 text-gold-soft" strokeWidth={1.75} />
-                <span>{label}</span>
-              </div>
+                <div
+                  key={label}
+                  ref={(el) => {
+                    badgeRefs.current[i] = el;
+                  }}
+                  className="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[13px] text-white/90 backdrop-blur-sm sm:text-sm"
+                >
+                  <Icon className="h-4 w-4 shrink-0 text-gold-soft" strokeWidth={1.75} />
+                  <span>{label}</span>
+                </div>
               );
             })}
           </div>
-        </div>
-
-        <div ref={formRef} id="booking" className="translate-y-6 scale-[0.98] opacity-0">
-          <ConsultationForm clinicWhatsapp={CLINIC_WHATSAPP} />
-        </div>
       </div>
 
       <div aria-hidden="true" className="absolute inset-x-0 bottom-0 z-[6] h-32 bg-gradient-to-t from-white/0 to-transparent" />
@@ -219,123 +236,5 @@ export default function Hero({ branch }: { branch?: BranchConfig }) {
         }
       `}</style>
     </section>
-  );
-}
-
-function ConsultationForm({ clinicWhatsapp }: { clinicWhatsapp: string }) {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [service, setService] = useState("");
-  const [error, setError] = useState("");
-  const [status, setStatus] = useState<"idle" | "sent">("idle");
-
-  function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-    const trimmedName = name.trim();
-    const trimmedPhone = phone.trim();
-
-    if (!trimmedName) {
-      setError("Please enter your name.");
-      return;
-    }
-    if (!/^[6-9]\d{9}$/.test(trimmedPhone)) {
-      setError("Please enter a valid 10-digit mobile number.");
-      return;
-    }
-    if (!service) {
-      setError("Please select a treatment.");
-      return;
-    }
-    setError("");
-
-    const message = `Hi, I'd like to book a consultation.\n\nName: ${trimmedName}\nPhone: ${trimmedPhone}\nInterested in: ${service}`;
-    const url = `https://wa.me/${clinicWhatsapp}?text=${encodeURIComponent(message)}`;
-    window.open(url, "_blank", "noopener,noreferrer");
-
-    setStatus("sent");
-  }
-
-  return (
-    <div className="rounded-3xl border border-white/15 bg-deep-teal/70 p-7 shadow-2xl shadow-black/40 backdrop-blur-md sm:p-9">
-      <h2 className="font-display text-2xl font-semibold text-white">Request Consultation</h2>
-      <p className="mt-2 text-sm text-white/70">You&apos;ll be redirected to WhatsApp to confirm.</p>
-
-      {status === "sent" ? (
-        <div className="mt-8 rounded-2xl border border-gold-soft/30 bg-gold-soft/10 px-5 py-6 text-center">
-          <p className="font-semibold text-white">Thank you! 🎉</p>
-          <p className="mt-1 text-sm text-white/75">Continue on WhatsApp — we&apos;ll confirm your slot there.</p>
-        </div>
-      ) : (
-        <form onSubmit={handleSubmit} className="mt-7 space-y-5">
-          <div>
-            <label htmlFor="name" className="mb-2 block text-xs font-semibold uppercase tracking-[0.15em] text-gold-soft">
-              Full Name
-            </label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              required
-              placeholder="John Doe"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="input-glass"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="phone" className="mb-2 block text-xs font-semibold uppercase tracking-[0.15em] text-gold-soft">
-              Phone
-            </label>
-            <div className="flex overflow-hidden rounded-xl border border-white/15 bg-white/5 focus-within:ring-2 focus-within:ring-gold-soft">
-              <span className="flex items-center border-r border-white/15 px-4 text-sm text-white/70">+91</span>
-              <input
-                id="phone"
-                name="phone"
-                type="tel"
-                inputMode="numeric"
-                required
-                placeholder="99999 00000"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value.replace(/\D/g, "").slice(0, 10))}
-                className="w-full bg-transparent px-4 py-3 text-sm text-white placeholder:text-white/40 outline-none"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label htmlFor="service" className="mb-2 block text-xs font-semibold uppercase tracking-[0.15em] text-gold-soft">
-              Treatment Interest
-            </label>
-            <div className="relative">
-              <select
-                id="service"
-                name="service"
-                required
-                value={service}
-                onChange={(e) => setService(e.target.value)}
-                className="input-glass appearance-none pr-10"
-              >
-                <option value="" disabled className="text-teal-darker">
-                  Select Service...
-                </option>
-                {SERVICES.map((s) => (
-                  <option key={s} value={s} className="text-teal-darker">
-                    {s}
-                  </option>
-                ))}
-              </select>
-              <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/60" />
-            </div>
-          </div>
-
-          {error && <p className="rounded-xl bg-red-500/10 px-3 py-2 text-sm text-red-300">{error}</p>}
-
-          <button type="submit" className="btn-pill-solid w-full justify-center bg-gold text-teal-darker hover:bg-gold/90">
-            Send via WhatsApp
-          </button>
-        </form>
-      )}
-    </div>
   );
 }

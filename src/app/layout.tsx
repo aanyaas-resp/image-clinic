@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Montserrat, Cinzel } from "next/font/google";
+import { Cormorant_Garamond, Jost, Italiana } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -7,26 +7,26 @@ import Footer from "@/components/Footer";
 import SmoothScroll from "@/app/Smoothscroll";
 import FloatingContactButtons from "@/components/FloatingContactButtons";
 
-// Playfair Display — elegant serif for headings/logo type.
-const displayFont = Playfair_Display({
+// Cormorant Garamond — soft, candlelit serif for headings/logo type.
+const displayFont = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["500", "600", "700"],
   variable: "--font-display-family",
   display: "swap",
 });
 
-// Montserrat — clean geometric sans for body copy & UI.
-const sansFont = Montserrat({
+// Jost — clean geometric sans for body copy & UI.
+const sansFont = Jost({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-sans-family",
   display: "swap",
 });
 
-// Cinzel — small-caps accent face for eyebrows / kicker labels only.
-const accentFont = Cinzel({
+// Italiana — slender, luxury small-caps face for eyebrows / kicker labels only.
+const accentFont = Italiana({
   subsets: ["latin"],
-  weight: ["500", "600"],
+  weight: ["400"],
   variable: "--font-accent-family",
   display: "swap",
 });
@@ -37,7 +37,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#5E3B15",
+  themeColor: "#C9A13B",
 };
 
 export const metadata: Metadata = {
@@ -105,7 +105,10 @@ const LOCAL_BUSINESS_JSON_LD = {
     addressCountry: "IN",
   },
   url: SITE_URL,
-  sameAs: [],
+  sameAs: [
+    "https://www.instagram.com/imageclinicindia/",
+    "https://www.google.com/maps/search/?api=1&query=Image+Clinic+Greater+Kailash+New+Delhi",
+  ],
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
@@ -119,7 +122,7 @@ const LOCAL_BUSINESS_JSON_LD = {
         "Sunday",
       ],
       opens: "10:30",
-      closes: "20:30", // TODO: confirm actual closing time
+      closes: "20:30",
     },
   ],
 };
@@ -158,14 +161,11 @@ export default function RootLayout({
         </Script>
       </head>
       <body>
-       
         <Navbar />
         <SmoothScroll>
           {children}
           <Footer />
         </SmoothScroll>
-          <FloatingContactButtons />
-
       </body>
     </html>
   );

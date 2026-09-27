@@ -47,14 +47,14 @@ export default function FAQPage() {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
 
   return (
-    <main className="bg-cream-text px-6 py-24 sm:px-10 lg:px-16">
+    <main className="bg-noir px-6 py-24 sm:px-10 lg:px-16">
       <div className="mx-auto max-w-3xl">
         <div className="text-center">
           <p className="eyebrow mb-4 justify-center">Questions & Answers</p>
-          <h1 className="font-display text-3xl font-semibold leading-snug text-teal-darker sm:text-4xl lg:text-5xl">
+          <h1 className="font-display text-3xl font-semibold leading-snug text-parchment sm:text-4xl lg:text-5xl">
             Frequently Asked <span className="accent-italic">Questions</span>
           </h1>
-          <p className="mt-4 font-sans text-base leading-relaxed text-teal-darker/70">
+          <p className="mt-4 font-sans text-base leading-relaxed text-parchment/70">
             Everything you need to know before your visit to Image
             Clinic. Can&apos;t find your answer here? Reach out and we&apos;ll
             help directly.
@@ -67,7 +67,7 @@ export default function FAQPage() {
             return (
               <div
                 key={faq.question}
-                className="overflow-hidden rounded-2xl border border-deep-teal/12 bg-white/40"
+                className="overflow-hidden rounded-2xl border border-gold/15 bg-smoke/60"
               >
                 <button
                   type="button"
@@ -75,11 +75,11 @@ export default function FAQPage() {
                   aria-expanded={isOpen}
                   className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left sm:px-6 sm:py-5"
                 >
-                  <span className="font-display text-base font-semibold text-teal-darker sm:text-lg">
+                  <span className="font-display text-base font-semibold text-parchment sm:text-lg">
                     {faq.question}
                   </span>
                   <ChevronDown
-                    className={`h-5 w-5 shrink-0 text-deep-teal transition-transform duration-300 ${
+                    className={`h-5 w-5 shrink-0 text-gold transition-transform duration-300 ${
                       isOpen ? "rotate-180" : ""
                     }`}
                     strokeWidth={2}
@@ -92,7 +92,7 @@ export default function FAQPage() {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <p className="px-5 pb-5 font-sans text-sm leading-relaxed text-teal-darker/70 sm:px-6 sm:pb-6 sm:text-base">
+                    <p className="px-5 pb-5 font-sans text-sm leading-relaxed text-parchment/70 sm:px-6 sm:pb-6 sm:text-base">
                       {faq.answer}
                     </p>
                   </div>
@@ -102,25 +102,6 @@ export default function FAQPage() {
           })}
         </div>
 
-        <div className="mt-14 rounded-3xl bg-deep-teal px-6 py-10 text-center sm:px-10">
-          <h2 className="font-display text-xl font-semibold text-cream-text sm:text-2xl">
-            Still have questions?
-          </h2>
-          <p className="mt-2 font-sans text-sm text-cream-text/75 sm:text-base">
-            Book a consultation and get answers specific to your skin or hair.
-          </p>
-          <button
-            type="button"
-            onClick={() => setIsBookingOpen(true)}
-            className="btn-pill group mt-6 inline-flex bg-gold-soft text-deep-teal shadow-md shadow-black/15 transition-transform duration-300 hover:scale-[1.04] hover:bg-gold-soft/90 active:scale-[0.98]"
-          >
-            Book Your Appointment
-            <ArrowUpRight
-              className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-              strokeWidth={2}
-            />
-          </button>
-        </div>
       </div>
 
       {isBookingOpen && (

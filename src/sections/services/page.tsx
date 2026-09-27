@@ -3,9 +3,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import gsap from "gsap";
-import BookingModal from "../../components/BookingModal";
 
 type Treatment = {
   slug: string;
@@ -92,48 +90,9 @@ const SERVICE_JSON_LD = {
   })),
 };
 
-function useActiveOnCenter<T extends HTMLElement>(count: number) {
-  const refs = useRef<(T | null)[]>([]);
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
-
-  useEffect(() => {
-    const els = refs.current;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const idx = els.indexOf(entry.target as T);
-          if (idx === -1) return;
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
-            setActiveIndex(idx);
-          }
-        });
-      },
-      { threshold: [0.6], rootMargin: "0px" }
-    );
-    els.forEach((el) => el && observer.observe(el));
-    return () => observer.disconnect();
-  }, [count]);
-
-  return { refs, activeIndex };
-}
-
-function TreatmentRow({
-  items,
-  onBook,
-}: {
-  items: Treatment[];
-  onBook: (title: string) => void;
-}) {
-  const rowRef = useRef<HTMLDivElement>(null);
+function TreatmentGrid({ items }: { items: Treatment[] }) {
+  const gridRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const { refs: activeRefs, activeIndex } = useActiveOnCenter<HTMLDivElement>(items.length);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
-
-  function setRefs(el: HTMLDivElement | null, i: number) {
-    cardRefs.current[i] = el;
-    activeRefs.current[i] = el;
-  }
 
   useEffect(() => {
     const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
@@ -143,130 +102,60 @@ function TreatmentRow({
       gsap.fromTo(
         cards,
         { autoAlpha: 0, y: 24 },
-        { autoAlpha: 1, y: 0, duration: 0.6, ease: "power2.out", stagger: 0.07 }
+        { autoAlpha: 1, y: 0, duration: 0.6, ease: "power2.out", stagger: 0.06 }
       );
-    }, rowRef);
+    }, gridRef);
 
     return () => ctx.revert();
   }, [items]);
 
-  function updateScrollButtons() {
-    const el = rowRef.current;
-    if (!el) return;
-    setCanScrollLeft(el.scrollLeft > 4);
-    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
-  }
-
-  useEffect(() => {
-    updateScrollButtons();
-    const el = rowRef.current;
-    if (!el) return;
-    el.addEventListener("scroll", updateScrollButtons, { passive: true });
-    window.addEventListener("resize", updateScrollButtons);
-    return () => {
-      el.removeEventListener("scroll", updateScrollButtons);
-      window.removeEventListener("resize", updateScrollButtons);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [items]);
-
-  function scrollByCard(direction: "left" | "right") {
-    const el = rowRef.current;
-    if (!el) return;
-    const firstCard = cardRefs.current[0];
-    const step = firstCard ? firstCard.offsetWidth + 20 : el.clientWidth * 0.8;
-    el.scrollBy({ left: direction === "left" ? -step : step, behavior: "smooth" });
-  }
-
   return (
-    <div className="relative">
-      <div ref={rowRef} className="services-scroll">
-        {items.map((t, i) => (
-          <div
-            key={t.slug}
-            ref={(el) => setRefs(el, i)}
-            className={`service-card group relative aspect-[4/5] overflow-hidden rounded-3xl shadow-[0_10px_30px_-6px_rgba(94,59,21,0.25)] transition-shadow duration-500 hover:shadow-[0_20px_45px_-10px_rgba(94,59,21,0.45)] ${
-              activeIndex === i ? "is-active" : ""
-            }`}
-          >
-            <div className="absolute inset-0">
-              <Image
-                src={t.image}
-                alt={`${t.title} at Image Clinic, Kailash Garden, Delhi`}
-                fill
-                sizes="(max-width: 1024px) 78vw, 25vw"
-                className="service-media-img object-cover"
-              />
-            </div>
-
-            {/* Resting-state gradient: only strong enough at the very
-                bottom to keep the label legible — most of the photo
-                stays visible instead of getting washed out. */}
+    <div
+      ref={gridRef}
+      className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6 xl:grid-cols-4"
+    >
+      {items.map((t, i) => (
+        <div
+          key={t.slug}
+          ref={(el) => {
+            cardRefs.current[i] = el;
+          }}
+          className="service-card group flex h-[440px] flex-col overflow-hidden rounded-3xl border border-parchment/10 bg-smoke shadow-[0_10px_30px_-6px_rgba(0,0,0,0.5)] transition-shadow duration-500 hover:shadow-[0_20px_45px_-10px_rgba(201,161,59,0.35)]"
+        >
+          {/* Image — top 60% of the card */}
+          <div className="relative h-[60%] w-full overflow-hidden">
+            <Image
+              src={t.image}
+              alt={`${t.title} at Image Clinic, Kailash Garden, Delhi`}
+              fill
+              sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, (max-width: 1280px) 31vw, 23vw"
+              className="service-media-img object-cover"
+            />
             <div
               aria-hidden="true"
-              className="absolute inset-0 bg-gradient-to-t from-chocolate-deep/75 via-chocolate-deep/10 to-transparent"
+              className="absolute inset-0 bg-gradient-to-t from-noir-deep/40 via-transparent to-transparent"
             />
-
-            <div className="service-label absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 p-5">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wide text-cream/90">{t.label}</p>
-               
-              </div>
-            </div>
-
-            {/* Hover / active overlay: eased back from a near-solid fill
-                to a gradient that stays dark where the text sits (bottom
-                ~2/3) but lets the top of the photo show through. */}
-            <div className="service-overlay absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-chocolate-deep/95 via-chocolate-deep/85 to-chocolate-deep/15 p-6">
-              <h3 className="font-display text-xl font-semibold leading-snug text-cream">
-                {t.title.replace(/ LHR Treatment$/, "")}
-              </h3>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-bronze">
-                {t.tagline}
-              </p>
-              <p className="mt-3 text-sm leading-relaxed text-cream/80 line-clamp-4">{t.description}</p>
-
-              <div className="mt-5 flex items-center gap-3">
-                <button
-                  type="button"
-                  onClick={() => onBook(t.title)}
-                  className="rounded-full bg-bronze px-4 py-2 text-xs font-semibold text-cream shadow-md shadow-chocolate-deep/30 transition-transform duration-200 hover:scale-[1.04] hover:bg-chocolate active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-bronze"
-                >
-                  Book Now
-                </button>
-              </div>
-            </div>
           </div>
-        ))}
-      </div>
 
-      <div className="mt-4 flex items-center justify-center gap-3 lg:hidden">
-        <button
-          type="button"
-          onClick={() => scrollByCard("left")}
-          disabled={!canScrollLeft}
-          aria-label="Scroll to previous treatments"
-          className="scroll-nav-btn"
-        >
-          <ChevronLeft className="h-4 w-4" strokeWidth={2.25} />
-        </button>
-        <button
-          type="button"
-          onClick={() => scrollByCard("right")}
-          disabled={!canScrollRight}
-          aria-label="Scroll to more treatments"
-          className="scroll-nav-btn"
-        >
-          <ChevronRight className="h-4 w-4" strokeWidth={2.25} />
-        </button>
-      </div>
+          {/* Text — bottom 40% of the card */}
+          <div className="flex flex-1 flex-col justify-center px-5 py-4">
+            <h3 className="font-display text-lg font-semibold leading-snug text-parchment">
+              {t.title.replace(/ LHR Treatment$/, "")}
+            </h3>
+            <p className="mt-1 text-[11px] font-semibold uppercase tracking-wider text-gold-soft">
+              {t.tagline}
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-parchment/70 line-clamp-3">
+              {t.description}
+            </p>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
 
 export default function Services() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [presetService, setPresetService] = useState<string | undefined>(undefined);
   const [activeCategory, setActiveCategory] = useState(CATEGORIES[0].id);
   const headingWrapRef = useRef<HTMLDivElement>(null);
 
@@ -274,11 +163,6 @@ export default function Services() {
     () => CATEGORIES.find((c) => c.id === activeCategory) ?? CATEGORIES[0],
     [activeCategory]
   );
-
-  function openBooking(title: string) {
-    setPresetService(title);
-    setIsModalOpen(true);
-  }
 
   useEffect(() => {
     if (!headingWrapRef.current) return;
@@ -290,7 +174,7 @@ export default function Services() {
   }, [activeCategory]);
 
   return (
-    <section id="services" className="bg-ivory px-6 py-24 sm:px-10 lg:px-16">
+    <section id="services" className="bg-noir px-6 py-24 sm:px-10 lg:px-16">
       {/* Structured data — lets search engines see every treatment even
           though the UI only ever renders one category's cards at a time. */}
       <script
@@ -302,11 +186,11 @@ export default function Services() {
       <div className="mx-auto max-w-7xl">
         <div ref={headingWrapRef} className="mx-auto max-w-2xl text-center">
           <p className="eyebrow mb-4 justify-center">{current.eyebrow}</p>
-          <h2 className="font-display text-3xl font-semibold leading-snug text-chocolate-deep sm:text-4xl lg:text-5xl">
+          <h2 className="font-display text-3xl font-semibold leading-snug text-parchment sm:text-4xl lg:text-5xl">
             {current.heading.split(" ").slice(0, -1).join(" ")}{" "}
             <span className="accent-italic">{current.heading.split(" ").slice(-1)}</span>
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-chocolate-deep/70">{current.subheading}</p>
+          <p className="mt-4 text-base leading-relaxed text-parchment/70">{current.subheading}</p>
         </div>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
@@ -328,8 +212,8 @@ export default function Services() {
                   onClick={() => setActiveCategory(c.id)}
                   className={`rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-wide transition-colors duration-200 sm:text-sm ${
                     isActive
-                      ? "border-chocolate bg-chocolate text-cream shadow-md shadow-chocolate/25"
-                      : "border-chocolate-deep/20 bg-transparent text-chocolate-deep/70 hover:border-bronze/50 hover:text-chocolate-deep"
+                      ? "border-gold bg-gold text-noir-deep shadow-md shadow-gold/25"
+                      : "border-parchment/20 bg-transparent text-parchment/70 hover:border-gold-soft/50 hover:text-parchment"
                   }`}
                 >
                   {c.tabLabel}
@@ -337,8 +221,6 @@ export default function Services() {
               );
             })}
           </div>
-
-          
         </div>
 
         <div
@@ -347,7 +229,7 @@ export default function Services() {
           id={`panel-${current.id}`}
           aria-labelledby={`tab-${current.id}`}
         >
-          <TreatmentRow key={current.id} items={current.items} onBook={openBooking} />
+          <TreatmentGrid key={current.id} items={current.items} />
         </div>
 
         {/* Visually hidden, crawler/screen-reader visible list of every
@@ -364,15 +246,6 @@ export default function Services() {
           </ul>
         </div>
       </div>
-
-      <BookingModal
-        isOpen={isModalOpen}
-        presetService={presetService}
-        onClose={() => {
-          setIsModalOpen(false);
-          setPresetService(undefined);
-        }}
-      />
     </section>
   );
 }

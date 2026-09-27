@@ -58,8 +58,6 @@ export default function JourneySection() {
         tl.fromTo(eyebrowRef.current, { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.6 }, 0)
           .fromTo(headingRef.current, { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.7 }, 0.1);
 
-        // Steps reveal one at a time, each connecting line "growing" down
-        // to the next number — a distinct, journey-appropriate motion.
         STEPS.forEach((_, i) => {
           const stepStart = 0.35 + i * 0.28;
           tl.fromTo(
@@ -104,31 +102,32 @@ export default function JourneySection() {
       ref={sectionRef}
       id="journey"
       aria-labelledby="journey-heading"
-      className="relative overflow-hidden bg-deep-teal px-6 py-20 sm:px-10 sm:py-28 lg:px-16"
+      className="relative overflow-hidden bg-parchment px-6 py-20 sm:px-10 sm:py-28 lg:px-16"
     >
+      {/* soft ambient glow — dialed way down since this reads on a light surface */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -left-24 top-0 h-[380px] w-[380px] rounded-full bg-[radial-gradient(circle,rgba(217,173,119,0.14),transparent_65%)]"
+        className="pointer-events-none absolute -left-24 top-0 h-[380px] w-[380px] rounded-full bg-[radial-gradient(circle,rgba(201,161,59,0.10),transparent_65%)]"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -bottom-32 -right-16 h-[320px] w-[320px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.06),transparent_65%)]"
+        className="pointer-events-none absolute -bottom-32 -right-16 h-[320px] w-[320px] rounded-full bg-[radial-gradient(circle,rgba(156,107,46,0.08),transparent_65%)]"
       />
 
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 lg:grid-cols-2 lg:gap-20">
         {/* Copy + steps column */}
         <div>
-          <p ref={eyebrowRef} className="eyebrow mb-4 text-gold [&::before]:bg-gold/50">
+          <p ref={eyebrowRef} className="eyebrow mb-4 text-amber [&::before]:bg-amber/50">
             The Image Clinic Journey
           </p>
           <h2
             ref={headingRef}
             id="journey-heading"
-            className="font-display text-[2rem] font-semibold leading-tight text-cream-text sm:text-4xl lg:text-5xl"
+            className="font-display text-[2rem] font-semibold leading-tight text-noir sm:text-4xl lg:text-5xl"
           >
             Your Path to
             <br />
-            <span className="font-display italic text-gold">Radiance</span>
+            <span className="font-display italic text-amber">Radiance</span>
           </h2>
 
           <ol className="mt-12 space-y-10">
@@ -141,7 +140,7 @@ export default function JourneySection() {
                 className="relative flex gap-5 pl-0"
               >
                 <div className="relative flex flex-col items-center">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gold font-display text-lg font-semibold text-deep-teal">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gold font-display text-lg font-semibold text-noir-deep shadow-sm shadow-gold/30">
                     {step.number}
                   </span>
                   {i < STEPS.length - 1 && (
@@ -150,15 +149,15 @@ export default function JourneySection() {
                         lineRefs.current[i] = el;
                       }}
                       aria-hidden="true"
-                      className="mt-2 w-px flex-1 border-l border-dashed border-cream-text/25"
+                      className="mt-2 w-px flex-1 border-l border-dashed border-noir/20"
                     />
                   )}
                 </div>
                 <div className="pb-2">
-                  <h3 className="font-display text-lg font-semibold text-cream-text sm:text-xl">
+                  <h3 className="font-display text-lg font-semibold text-noir sm:text-xl">
                     {step.title}
                   </h3>
-                  <p className="mt-2 max-w-md font-sans text-sm leading-relaxed text-cream-text/70 sm:text-base">
+                  <p className="mt-2 max-w-md font-sans text-sm leading-relaxed text-noir/65 sm:text-base">
                     {step.description}
                   </p>
                 </div>
@@ -167,11 +166,8 @@ export default function JourneySection() {
           </ol>
 
           <div ref={ctaWrapRef} className="mt-10">
-            <p className="font-sans text-sm font-semibold text-cream-text/90">Ready to start?</p>
-            <a
-              href="#contact"
-              className="btn-pill group mt-4 inline-flex bg-gold text-deep-teal shadow-md shadow-black/20 transition-transform duration-300 hover:scale-[1.04] hover:bg-gold/90 active:scale-[0.98]"
-            >
+            <p className="font-sans text-sm font-semibold text-noir/80">Ready to start?</p>
+            <a href="#contact" className="btn-pill-solid group mt-4 inline-flex">
               Start Your Journey
               <ArrowUpRight
                 className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
@@ -183,11 +179,11 @@ export default function JourneySection() {
 
         {/* Image column */}
         <div ref={imageColRef} className="relative mx-auto w-full max-w-lg lg:mx-0 lg:max-w-none">
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[20px] ring-1 ring-inset ring-cream-text/15 sm:rounded-[24px]">
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[20px] shadow-[0_16px_48px_rgba(20,16,11,0.14)] ring-1 ring-inset ring-noir/10 sm:rounded-[24px]">
             {/* TODO: replace with a real treatment-room photo if this isn't it, e.g. "/journey/treatment.jpg" */}
             <Image
               src="/images/main-image-1.png"
-              alt="Dermatologist performing a skin treatment at Image Clinic, Kailash Garden, Delhi"
+              alt="Dermatologist performing a skin treatment at Image Clinic, Greater Kailash, Delhi"
               fill
               sizes="(max-width: 640px) 92vw, (max-width: 1024px) 80vw, 45vw"
               className="object-cover"
@@ -198,10 +194,10 @@ export default function JourneySection() {
           {/* Trust badge — swap copy once you have a real, verifiable claim */}
           <div
             ref={badgeRef}
-            className="absolute -bottom-8 -left-6 flex h-28 w-28 flex-col items-center justify-center rounded-full bg-gold text-center shadow-[0_12px_32px_rgba(0,0,0,0.3)] sm:h-32 sm:w-32"
+            className="absolute -bottom-8 -left-6 flex h-28 w-28 flex-col items-center justify-center rounded-full bg-gold text-center shadow-[0_12px_32px_rgba(20,16,11,0.25)] sm:h-32 sm:w-32"
           >
-            <p className="font-display text-sm font-semibold text-deep-teal">Trusted in</p>
-            <p className="font-display text-sm font-semibold text-deep-teal">Kailash Garden</p>
+            <p className="font-display text-sm font-semibold text-noir-deep">Trusted in</p>
+            <p className="font-display text-sm font-semibold text-noir-deep">Greater Kailash</p>
           </div>
         </div>
       </div>

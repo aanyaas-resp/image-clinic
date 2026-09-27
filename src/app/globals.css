@@ -7,34 +7,40 @@
 @source "./sections";
 
 @theme {
-  /* --- Image Clinic brand palette --- */
-  --color-ivory: #e1d6c2;          /* main background — warm ivory/beige */
-  --color-chocolate: #5e3b15;      /* primary brand — logo, headings, CTAs */
-  --color-chocolate-deep: #3f2610; /* darker chocolate — dark panels, footer */
-  --color-bronze: #8a6840;         /* secondary brown — links, hovers, icons */
-  --color-taupe: #d2c6ac;          /* marble accents — borders, dividers */
-  --color-cream: #e9e0d0;          /* soft cream — light panels, cards */
+  /* --- Image Clinic brand palette: light, golden-lit luxury (ivory & champagne) --- */
+  --color-noir: #faf6ef;        /* main background — warm ivory / champagne base */
+  --color-noir-deep: #efe4d0;   /* deeper panel — footer, elevated cards */
+  --color-gold: #b8863a;        /* primary brand — logo, CTAs, headings */
+  --color-gold-soft: #d9b26b;   /* soft shimmer gold — highlight, hovers */
+  --color-amber: #7a5122;       /* deep bronze/amber — secondary links, icons */
+  --color-parchment: #2b2016;   /* espresso ink — primary text on light surfaces */
+  --color-smoke: #f3e9d8;       /* card & divider surface — subtle warm ivory tone */
 
-  --font-display: var(--font-display-family), Georgia, serif;   /* Playfair Display */
-  --font-sans: var(--font-sans-family), -apple-system, system-ui, sans-serif; /* Montserrat */
-  --font-accent: var(--font-accent-family), Georgia, serif;     /* Cinzel — eyebrows only */
+  --font-display: var(--font-display-family), Georgia, serif;   /* Cormorant Garamond */
+  --font-sans: var(--font-sans-family), -apple-system, system-ui, sans-serif; /* Jost */
+  --font-accent: var(--font-accent-family), Georgia, serif;     /* Italiana — eyebrows only */
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
   }
 
   body {
-    @apply bg-ivory font-sans text-chocolate-deep antialiased;
+    @apply bg-noir font-sans text-parchment antialiased;
+  }
+
+  [id] {
+    scroll-margin-top: 6rem;
   }
 
   ::selection {
-    @apply bg-bronze/25 text-chocolate-deep;
+    @apply bg-gold/25 text-parchment;
   }
 
   :focus-visible {
-    @apply outline-none ring-2 ring-bronze ring-offset-2 ring-offset-ivory;
+    @apply outline-none ring-2 ring-gold ring-offset-2 ring-offset-noir;
   }
 }
 
@@ -45,36 +51,36 @@
 }
 
 @layer components {
-  /* Small caps kicker above section headings — Cinzel, wide tracking */
+  /* Small caps kicker above section headings — Italiana, wide tracking, glowing gold */
   .eyebrow {
-    @apply inline-flex items-center gap-2 font-accent text-xs font-semibold uppercase tracking-[0.22em] text-bronze;
+    @apply inline-flex items-center gap-2 font-accent text-xs font-semibold uppercase tracking-[0.22em] text-gold;
   }
   .eyebrow::before {
     content: "";
-    @apply h-px w-6 bg-bronze/50;
+    @apply h-px w-6 bg-gold/50;
   }
 
   /* Italic accent word inside headings, e.g. "Refined <Aesthetics>" */
   .accent-italic {
-    @apply font-display italic text-bronze;
+    @apply font-display italic text-gold;
   }
 
   /* Pill buttons */
   .btn-pill-solid {
-    @apply btn-pill bg-chocolate text-cream shadow-md shadow-chocolate/25 hover:bg-chocolate-deep;
+    @apply btn-pill bg-gold text-noir shadow-md shadow-gold/25 hover:bg-gold-soft hover:shadow-lg hover:shadow-gold/35;
   }
   .btn-pill-outline {
-    @apply btn-pill border-2 border-chocolate/25 text-chocolate hover:border-bronze/60 hover:bg-bronze/5;
+    @apply btn-pill border-2 border-gold/35 text-parchment hover:border-gold/60 hover:bg-gold/8;
   }
 
-  /* Shared input style for the dark glass-panel forms (Hero consultation form, BookingModal) */
+  /* Shared input style for glass-panel forms (Hero consultation form, BookingModal) */
   .input-glass {
-    @apply w-full rounded-xl border border-cream/20 bg-cream/5 px-4 py-3 text-sm text-cream placeholder:text-cream/40 outline-none transition focus:ring-2 focus:ring-taupe;
+    @apply w-full rounded-xl border border-white/15 bg-[#0b171b]/75 px-4 py-3 text-sm text-white placeholder:text-white/45 outline-none transition focus:ring-2 focus:ring-gold-soft;
   }
 
   /* Small round nav buttons for the mobile services scroller */
   .scroll-nav-btn {
-    @apply flex h-9 w-9 items-center justify-center rounded-full border border-chocolate/20 bg-cream text-chocolate shadow-md shadow-chocolate/10 transition hover:bg-chocolate hover:text-cream active:scale-95 disabled:pointer-events-none disabled:opacity-30;
+    @apply flex h-9 w-9 items-center justify-center rounded-full border border-gold/25 bg-smoke text-amber shadow-md shadow-noir-deep/20 transition hover:bg-gold hover:text-noir active:scale-95 disabled:pointer-events-none disabled:opacity-30;
   }
 
   /* Services row: horizontal snap-scroll on mobile/tablet, plain 4-col
@@ -138,19 +144,20 @@
 }
 
 @layer utilities {
-  /* Curved SVG handoff at the base of the hero section */
+  /* Curved SVG handoff at the base of the hero section — matches the
+     light body background so the curve blends into the next section. */
   .hero-curve {
-    @apply pointer-events-none absolute inset-x-0 bottom-0 z-6 h-10 w-full text-ivory sm:h-16;
+    @apply pointer-events-none absolute inset-x-0 bottom-0 z-6 h-10 w-full text-noir sm:h-16;
   }
 
-  /* Signature brand texture — soft marble veining in bronze/taupe on ivory.
+  /* Signature brand texture — soft, golden ambient glow on warm ivory.
      Used sparingly as the site's one recurring visual signature. */
   .marble-texture {
-  background-image:
-    radial-gradient(ellipse 60% 50% at 15% 20%, rgba(138, 104, 64, 0.18), transparent 55%),
-    radial-gradient(ellipse 55% 45% at 85% 75%, rgba(94, 59, 21, 0.15), transparent 55%),
-    linear-gradient(115deg, transparent 42%, rgba(210, 198, 172, 0.5) 50%, transparent 58%);
-}
+    background-image:
+      radial-gradient(ellipse 60% 50% at 15% 20%, rgba(184, 134, 58, 0.14), transparent 55%),
+      radial-gradient(ellipse 55% 45% at 85% 75%, rgba(217, 178, 107, 0.12), transparent 55%),
+      linear-gradient(115deg, transparent 42%, rgba(122, 81, 34, 0.1) 50%, transparent 58%);
+  }
 
   @keyframes pingSlow {
     0% {

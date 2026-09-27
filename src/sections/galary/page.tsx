@@ -158,14 +158,14 @@ export default function Gallery() {
   const hasMore = visibleCount < GALLERY.length;
 
   return (
-    <section ref={sectionRef} id="gallery" className="bg-cream-text px-6 py-24 sm:px-10 lg:px-16">
+    <section ref={sectionRef} id="gallery" className="bg-noir px-6 py-24 sm:px-10 lg:px-16">
       <div className="mx-auto max-w-7xl">
         <div ref={headingWrapRef} className="mx-auto max-w-2xl text-center">
           <p className="eyebrow mb-4">A Look Inside</p>
-          <h2 className="font-display text-3xl font-semibold leading-snug text-teal-darker sm:text-4xl lg:text-5xl">
+          <h2 className="font-display text-3xl font-semibold leading-snug text-parchment sm:text-4xl lg:text-5xl">
             Our <span className="accent-italic">Gallery</span>
           </h2>
-          <p className="mt-4 font-sans text-base leading-relaxed text-teal-darker/70">
+          <p className="mt-4 font-sans text-base leading-relaxed text-parchment/70">
             A glimpse into our clinic — modern amenities, a calm setting, and the space where every treatment comes to life.
           </p>
         </div>
@@ -179,7 +179,7 @@ export default function Gallery() {
               }}
               type="button"
               onClick={() => setLightboxIndex(index)}
-              className="group relative aspect-[4/5] overflow-hidden rounded-3xl text-left shadow-[0_10px_30px_-6px_rgba(9,88,92,0.20)] outline-none transition-shadow duration-500 hover:shadow-[0_20px_45px_-10px_rgba(9,88,92,0.4)] focus-visible:ring-4 focus-visible:ring-gold-soft/40"
+              className="group relative aspect-[4/5] overflow-hidden rounded-3xl text-left shadow-[0_10px_30px_-6px_rgba(0,0,0,0.45)] outline-none transition-shadow duration-500 hover:shadow-[0_20px_45px_-10px_rgba(201,161,59,0.3)] focus-visible:ring-4 focus-visible:ring-gold-soft/40"
             >
               <div className="absolute inset-0 overflow-hidden">
                 <Image
@@ -192,14 +192,14 @@ export default function Gallery() {
                 />
               </div>
 
-              <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-deep-teal/70 via-deep-teal/5 to-transparent" />
+              <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-noir-deep/70 via-noir-deep/5 to-transparent" />
 
-              <span className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-deep-teal shadow-sm backdrop-blur-sm">
+              <span className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-noir-deep/80 text-gold-soft shadow-sm backdrop-blur-sm">
                 <ZoomIn className="h-4 w-4" strokeWidth={1.75} />
               </span>
 
-              <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-deep-teal/95 via-deep-teal/50 to-transparent p-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                <p className="font-sans text-sm font-medium leading-relaxed text-white line-clamp-4">{item.caption}</p>
+              <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-noir-deep/95 via-noir-deep/50 to-transparent p-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                <p className="font-sans text-sm font-medium leading-relaxed text-parchment line-clamp-4">{item.caption}</p>
               </div>
             </button>
           ))}
@@ -210,7 +210,7 @@ export default function Gallery() {
             <button
               type="button"
               onClick={() => setVisibleCount((count) => Math.min(count + INITIAL_VISIBLE, GALLERY.length))}
-              className="btn-pill group bg-deep-teal text-white shadow-md shadow-deep-teal/30 transition-transform duration-300 hover:scale-[1.04] hover:bg-deep-teal/90 active:scale-[0.98]"
+              className="btn-pill-solid group transition-transform duration-300 hover:scale-[1.04] active:scale-[0.98]"
             >
               <Images className="h-4 w-4 transition-transform duration-300 group-hover:rotate-6" strokeWidth={1.75} />
               View More Photos
@@ -226,10 +226,10 @@ export default function Gallery() {
           aria-label="Photo gallery viewer"
           tabIndex={-1}
           ref={dialogRef}
-          className="lightbox-backdrop fixed inset-0 z-[100] flex items-center justify-center bg-deep-teal/95 px-4 backdrop-blur-sm outline-none"
+          className="lightbox-backdrop fixed inset-0 z-[100] flex items-center justify-center bg-noir-deep/95 px-4 backdrop-blur-sm outline-none"
           onClick={closeLightbox}
         >
-          <p className="absolute left-1/2 top-5 -translate-x-1/2 text-xs font-semibold uppercase tracking-[0.14em] text-cream-text/60">
+          <p className="absolute left-1/2 top-5 -translate-x-1/2 text-xs font-semibold uppercase tracking-[0.14em] text-parchment/60">
             {lightboxIndex + 1} / {GALLERY.length}
           </p>
 
@@ -237,7 +237,7 @@ export default function Gallery() {
             type="button"
             onClick={closeLightbox}
             aria-label="Close gallery"
-            className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-cream-text transition-colors duration-200 hover:border-gold-soft hover:text-gold-soft"
+            className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full border border-gold/20 text-parchment transition-colors duration-200 hover:border-gold-soft hover:text-gold-soft"
           >
             <X className="h-5 w-5" strokeWidth={2} />
           </button>
@@ -249,7 +249,7 @@ export default function Gallery() {
               showPrev();
             }}
             aria-label="Previous photo"
-            className="absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 text-cream-text transition-colors duration-200 hover:border-gold-soft hover:text-gold-soft sm:left-6"
+            className="absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-gold/20 text-parchment transition-colors duration-200 hover:border-gold-soft hover:text-gold-soft sm:left-6"
           >
             <ChevronLeft className="h-5 w-5" strokeWidth={2} />
           </button>
@@ -257,8 +257,8 @@ export default function Gallery() {
           <div className="flex w-full max-w-3xl flex-col items-center" onClick={(e) => e.stopPropagation()}>
             <div key={lightboxIndex} className="lightbox-image relative aspect-[4/3] w-full overflow-hidden rounded-3xl ring-1 ring-inset ring-gold-soft/20">
               <Image src={GALLERY[lightboxIndex].image} alt={GALLERY[lightboxIndex].caption} fill className="object-cover" />
-              <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-deep-teal/90 via-transparent to-transparent" />
-              <p className="absolute inset-x-6 bottom-6 font-sans text-sm font-medium leading-relaxed text-cream-text sm:text-base">{GALLERY[lightboxIndex].caption}</p>
+              <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-noir-deep/90 via-transparent to-transparent" />
+              <p className="absolute inset-x-6 bottom-6 font-sans text-sm font-medium leading-relaxed text-parchment sm:text-base">{GALLERY[lightboxIndex].caption}</p>
             </div>
 
             {GALLERY.length > 1 && (
@@ -269,7 +269,7 @@ export default function Gallery() {
                     type="button"
                     aria-label={`Go to photo ${i + 1}`}
                     onClick={() => setLightboxIndex(i)}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${i === lightboxIndex ? "w-6 bg-gold-soft" : "w-1.5 bg-cream-text/30 hover:bg-cream-text/50"}`}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${i === lightboxIndex ? "w-6 bg-gold-soft" : "w-1.5 bg-parchment/30 hover:bg-parchment/50"}`}
                   />
                 ))}
               </div>
@@ -283,7 +283,7 @@ export default function Gallery() {
               showNext();
             }}
             aria-label="Next photo"
-            className="absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 text-cream-text transition-colors duration-200 hover:border-gold-soft hover:text-gold-soft sm:right-6"
+            className="absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-gold/20 text-parchment transition-colors duration-200 hover:border-gold-soft hover:text-gold-soft sm:right-6"
           >
             <ChevronRight className="h-5 w-5" strokeWidth={2} />
           </button>
