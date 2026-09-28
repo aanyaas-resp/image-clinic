@@ -10,8 +10,8 @@ const BADGES = [
 
 export default function Hero() {
   return (
-    <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-noir">
-      {/* LCP image. The ivory wash keeps the page light while the clinic still shows through. */}
+    <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-chocolate-deep">
+      {/* LCP image */}
       <Image
         src={HOME_BRAND.heroImage}
         alt={HOME_BRAND.heroAlt}
@@ -21,63 +21,62 @@ export default function Hero() {
         sizes="100vw"
         className="object-cover object-center"
       />
+
+      {/* Dark gradient, left to right on every screen size.
+          Kept dark all the way across so the centred text stays readable.
+          (chocolate-deep is dark; "noir" in your theme is the light ivory colour.) */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-b from-noir/95 via-noir/82 to-noir/95"
+        className="absolute inset-0 bg-gradient-to-r from-chocolate-deep/65 via-chocolate-deep/55 to-chocolate-deep/65 lg:from-chocolate-deep/90 lg:via-chocolate-deep/80 lg:to-chocolate-deep/55"
       />
+      {/* Soft gold glow */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_55%_50%_at_15%_25%,rgba(184,134,58,0.16),transparent_60%),radial-gradient(ellipse_50%_45%_at_88%_80%,rgba(217,178,107,0.2),transparent_60%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_55%_50%_at_15%_25%,rgba(184,134,58,0.18),transparent_60%),radial-gradient(ellipse_50%_45%_at_88%_80%,rgba(217,178,107,0.14),transparent_60%)]"
       />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center px-6 py-28 text-center sm:px-10 lg:px-16">
-        <p className="rise-in eyebrow mb-5 rounded-full border border-gold/30 bg-cream-white/80 px-5 py-2 [--d:50ms]">
-          {HOME_BRAND.name}
-        </p>
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-24 pt-36 sm:px-10 sm:pt-40 lg:px-16">
+        <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
+          <p className="rise-in eyebrow mb-4 text-gold-soft [--d:50ms]">{HOME_BRAND.name}</p>
 
-        <h1 className="rise-in font-display text-4xl font-semibold leading-[1.15] text-parchment sm:text-5xl lg:text-6xl [--d:120ms]">
-          <span className="bg-gradient-to-r from-gold via-gold-soft to-gold bg-clip-text italic text-transparent">
-            Best
-          </span>{" "}
-          Hair &amp; Skin Treatment
-          <br />
-          in Image Clinic
-        </h1>
+          <h1 className="rise-in font-display text-[2.75rem] font-semibold leading-[1.1] text-cream-white [text-shadow:0_2px_12px_rgba(0,0,0,0.45)] sm:text-6xl lg:text-7xl [--d:120ms]">
+            <span className="bg-gradient-to-r from-gold via-gold-soft to-gold bg-clip-text pr-1 italic text-transparent">
+              Best
+            </span>{" "}
+            Hair &amp; Skin Treatment
+            <br />
+            in Image Clinic
+          </h1>
 
-        <p className="rise-in mx-auto mt-6 max-w-md font-sans text-base leading-relaxed text-parchment/75 sm:text-lg [--d:200ms]">
-          At {HOME_BRAND.name}, we combine doctor-led expertise, advanced aesthetic care, and
-          personalised treatment plans to help you look and feel your best.
-        </p>
+          <p className="rise-in mx-auto mt-5 max-w-[19rem] font-sans text-[15px] leading-relaxed text-cream-white/90 [text-shadow:0_1px_8px_rgba(0,0,0,0.5)] sm:max-w-sm sm:text-base [--d:200ms]">
+            Doctor-led expertise, advanced aesthetic care and personalised treatment plans to
+            help you look and feel your best.
+          </p>
 
-        <div className="rise-in mt-8 flex flex-wrap items-center justify-center gap-5 [--d:280ms]">
-          <a href="#clinics" className="btn-pill-solid group px-8 py-3.5 sm:px-9 sm:py-4 sm:text-base">
-            <MapPin className="h-4 w-4 shrink-0" strokeWidth={2.25} />
-            <span>Our Clinics</span>
-            <ArrowRight
-              className="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1"
-              strokeWidth={2.25}
-            />
-          </a>
+          {/* Minimal buttons: side by side, only as wide as their content */}
+          <div className="rise-in mt-6 flex flex-wrap items-center justify-center gap-2.5 [--d:280ms]">
+            <a href="#clinics" className="btn-pill-solid group !px-5 !py-2.5 !text-[13px]">
+              <MapPin className="h-3.5 w-3.5 shrink-0" strokeWidth={2.25} />
+              <span>Our Clinics</span>
+              <ArrowRight
+                className="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover:translate-x-1"
+                strokeWidth={2.25}
+              />
+            </a>
 
-          <a href="#services" className="btn-pill-outline group px-8 py-3.5 sm:px-9 sm:py-4 sm:text-base">
-            <Sparkles
-              className="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:rotate-12"
-              strokeWidth={2.25}
-            />
-            <span>Our Treatments</span>
-          </a>
-        </div>
-
-        <div className="rise-in mt-8 flex flex-wrap items-center justify-center gap-3 [--d:360ms]">
-          {BADGES.map(({ icon: Icon, label }) => (
-            <div
-              key={label}
-              className="flex items-center gap-2 rounded-full border border-gold/25 bg-cream-white/80 px-4 py-2 text-[13px] text-parchment/85 sm:text-sm"
+            <a
+              href="#services"
+              className="btn-pill-outline group !border !border-cream-white/60 !px-4 !py-2.5 !text-[13px] text-cream-white hover:border-cream-white hover:bg-cream-white/10"
             >
-              <Icon className="h-4 w-4 shrink-0 text-gold" strokeWidth={1.75} />
-              <span>{label}</span>
-            </div>
-          ))}
+              <Sparkles
+                className="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover:rotate-12"
+                strokeWidth={2.25}
+              />
+              <span>Our Treatments</span>
+            </a>
+          </div>
+
+          
         </div>
       </div>
 

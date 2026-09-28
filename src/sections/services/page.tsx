@@ -11,7 +11,6 @@ type Treatment = {
   tagline: string;
   description: string;
   price?: string;
-  image: string;
 };
 
 type Category = {
@@ -22,6 +21,11 @@ type Category = {
   subheading: string;
   items: Treatment[];
 };
+
+/* All images live in ONE folder: /public/services/<slug>.webp
+   To change a photo, replace the file with the same name. */
+const imageFor = (slug: string) => `/services/${slug}.webp`;
+
 const CATEGORIES: Category[] = [
   {
     id: "anti-ageing",
@@ -31,11 +35,11 @@ const CATEGORIES: Category[] = [
     subheading:
       "Injectable and regenerative protocols that firm, hydrate and restore facial definition over time.",
     items: [
-      { slug: "botox", image: "/services/fillers.webp", label: "BOTOX", title: "Botox", tagline: "SMOOTH FINE LINES", description: "Botox softens expression lines and helps create a smoother, refreshed look while preserving natural facial movement." },
-      { slug: "mifu", image: "/services2/profhilo.webp", label: "MIFU", title: "MIFU", tagline: "LIFT & TIGHTEN", description: "MIFU delivers a lifting, tightening effect to rejuvenate the skin with minimal downtime and long-lasting definition." },
-      { slug: "sculptura", image: "/services2/threads.webp", label: "SCULPTURA", title: "Sculptura", tagline: "BODY CONTOURING", description: "Sculptura helps refine and contour the silhouette for a more sculpted, balanced profile and smoother look." },
-      { slug: "skin-booster", image: "/services2/skinbooster.webp", label: "SKIN BOOSTER", title: "Skin Booster", tagline: "DEEP HYDRATION", description: "Injectable hyaluronic acid boosters that hydrate from within for plump, smooth and naturally glowing skin." },
-      { slug: "profhilo", image: "/services/propfilo.webp", label: "PROFHILO", title: "Profhilo", tagline: "BIO-REMODELLING", description: "A next-generation bio-remodelling injectable that improves skin laxity, hydration and overall firmness." },
+      { slug: "botox", label: "BOTOX", title: "Botox", tagline: "SMOOTH FINE LINES", description: "Botox softens expression lines and helps create a smoother, refreshed look while preserving natural facial movement." },
+      { slug: "hifu", label: "HIFU", title: "HIFU", tagline: "LIFT & TIGHTEN", description: "HIFU uses focused ultrasound energy to lift and tighten the skin with minimal downtime and long-lasting definition." },
+      { slug: "sculptura", label: "SCULPTURA", title: "Sculptura", tagline: "BODY CONTOURING", description: "Sculptura helps refine and contour the silhouette for a more sculpted, balanced profile and smoother look." },
+      { slug: "skin-booster", label: "SKIN BOOSTER", title: "Skin Booster", tagline: "DEEP HYDRATION", description: "Injectable hyaluronic acid boosters that hydrate from within for plump, smooth and naturally glowing skin." },
+      { slug: "profhilo", label: "PROFHILO", title: "Profhilo", tagline: "BIO-REMODELLING", description: "A next-generation bio-remodelling injectable that improves skin laxity, hydration and overall firmness." },
     ],
   },
   {
@@ -46,11 +50,11 @@ const CATEGORIES: Category[] = [
     subheading:
       "Targeted acne and skin renewal treatments to calm active breakouts and improve long-term texture.",
     items: [
-      { slug: "acne-acne-scar", image: "/services/acne.webp", label: "ACNE & ACNE SCAR", title: "Acne & Acne Scar", tagline: "CLEARER, SMOOTHER SKIN", description: "Targeted clinical protocols that calm active breakouts and resurface acne scarring for a clearer, more even complexion." },
-      { slug: "dermapen-4", image: "/services/dermapen4.webp", label: "DERMAPEN 4", title: "Dermapen 4", tagline: "MICRONEEDLING", description: "Advanced medical microneedling that stimulates collagen production to refine texture, scarring and overall skin quality." },
-      { slug: "whitening-pigmentation", image: "/services/skinpigm.webp", label: "WHITENING & PIGMENTATION", title: "Whitening & Pigmentation", tagline: "EVEN, RADIANT TONE", description: "Medical-grade brightening combined with precision laser and peel therapy to fade pigmentation and even out skin tone." },
-      { slug: "korean-glass-skin", image: "/services/koreanglass.webp", label: "KOREAN GLASS SKIN", title: "Korean Glass Skin", tagline: "DEWY, LUMINOUS FINISH", description: "A layered glow-boosting protocol that hydrates, refines pores and evens tone for that signature translucent, glass-like skin." },
-      { slug: "hydrafacial", image: "/services2/hydrafacial.webp", label: "HYDRAFACIAL", title: "HydraFacial", tagline: "DEEP CLEANSE", description: "A three-step medical-grade facial that clears out impurities and locks in hydration for instantly brighter skin." },
+      { slug: "acne-acne-scar", label: "ACNE & ACNE SCAR", title: "Acne & Acne Scar", tagline: "CLEARER, SMOOTHER SKIN", description: "Targeted clinical protocols that calm active breakouts and resurface acne scarring for a clearer, more even complexion." },
+      { slug: "dermapen-4", label: "DERMAPEN 4", title: "Dermapen 4", tagline: "MICRONEEDLING", description: "Advanced medical microneedling that stimulates collagen production to refine texture, scarring and overall skin quality." },
+      { slug: "whitening-pigmentation", label: "WHITENING & PIGMENTATION", title: "Whitening & Pigmentation", tagline: "EVEN, RADIANT TONE", description: "Medical-grade brightening combined with precision laser and peel therapy to fade pigmentation and even out skin tone." },
+      { slug: "korean-glass-skin", label: "KOREAN GLASS SKIN", title: "Korean Glass Skin", tagline: "DEWY, LUMINOUS FINISH", description: "A layered glow-boosting protocol that hydrates, refines pores and evens tone for that signature translucent, glass-like skin." },
+      { slug: "hydrafacial", label: "HYDRAFACIAL", title: "HydraFacial", tagline: "DEEP CLEANSE", description: "A three-step medical-grade facial that clears out impurities and locks in hydration for instantly brighter skin." },
     ],
   },
   {
@@ -61,11 +65,11 @@ const CATEGORIES: Category[] = [
     subheading:
       "Advanced scalp therapies built to reactivate follicles and support thicker, healthier regrowth.",
     items: [
-      { slug: "prp-therapy", image: "/services2/prptheropy.webp", label: "PRP THERAPY", title: "PRP Therapy", tagline: "NATURAL REGROWTH", description: "Platelet-rich plasma therapy that harnesses your own growth factors to stimulate natural, healthier hair regrowth." },
-      { slug: "exosomes", image: "/services2/exosomes.webp", label: "EXOSOMES", title: "Exosomes", tagline: "CELLULAR REGROWTH", description: "Advanced exosome therapy that signals dormant follicles to reactivate, supporting thicker, healthier regrowth." },
-      { slug: "hairfall-treatment", image: "/services2/hairfalltreatment.webp", label: "HAIRFALL TREATMENT", title: "Hairfall Treatment", tagline: "REDUCE SHEDDING", description: "A targeted protocol that addresses the root causes of hairfall to reduce shedding and support fuller-looking hair." },
-      { slug: "dandruff-control", image: "/services2/dandruff.webp", label: "DANDRUFF CONTROL", title: "Dandruff Control", tagline: "CALM, CLEAR SCALP", description: "Medical-grade scalp therapy that targets flaking and irritation for a calmer, healthier scalp." },
-      { slug: "hair-strengthening", image: "/services2/strengthening.webp", label: "STRENGTHENING", title: "Hair Strengthening", tagline: "FORTIFY FROM ROOT", description: "Nutrient-infused strengthening therapy that fortifies hair from the root, reducing breakage and improving density." },
+      { slug: "prp-therapy", label: "PRP THERAPY", title: "PRP Therapy", tagline: "NATURAL REGROWTH", description: "Platelet-rich plasma therapy that harnesses your own growth factors to stimulate natural, healthier hair regrowth." },
+      { slug: "exosomes", label: "EXOSOMES", title: "Exosomes", tagline: "CELLULAR REGROWTH", description: "Advanced exosome therapy that signals dormant follicles to reactivate, supporting thicker, healthier regrowth." },
+      { slug: "hairfall-treatment", label: "HAIRFALL TREATMENT", title: "Hairfall Treatment", tagline: "REDUCE SHEDDING", description: "A targeted protocol that addresses the root causes of hairfall to reduce shedding and support fuller-looking hair." },
+      { slug: "dandruff-control", label: "DANDRUFF CONTROL", title: "Dandruff Control", tagline: "CALM, CLEAR SCALP", description: "Medical-grade scalp therapy that targets flaking and irritation for a calmer, healthier scalp." },
+      { slug: "hair-strengthening", label: "STRENGTHENING", title: "Hair Strengthening", tagline: "FORTIFY FROM ROOT", description: "Nutrient-infused strengthening therapy that fortifies hair from the root, reducing breakage and improving density." },
     ],
   },
 ];
@@ -89,6 +93,37 @@ const SERVICE_JSON_LD = {
   })),
 };
 
+/* Shows the photo; if a file is missing it shows a clean branded block
+   instead of a broken-image icon. */
+function CardImage({ t }: { t: Treatment }) {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return (
+      <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-gold/25 via-smoke to-gold-soft/30 p-4 text-center">
+        <span className="font-display text-xl font-semibold text-amber">{t.title}</span>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <Image
+        src={imageFor(t.slug)}
+        alt={`${t.title} treatment at Image Clinic`}
+        fill
+        sizes="(max-width: 640px) 78vw, (max-width: 1024px) 46vw, (max-width: 1280px) 31vw, 23vw"
+        className="service-media-img object-cover"
+        onError={() => setFailed(true)}
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-gradient-to-t from-noir-deep/40 via-transparent to-transparent"
+      />
+    </>
+  );
+}
+
 function TreatmentGrid({ items }: { items: Treatment[] }) {
   const gridRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -109,48 +144,46 @@ function TreatmentGrid({ items }: { items: Treatment[] }) {
   }, [items]);
 
   return (
-    <div
-      ref={gridRef}
-      className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6 xl:grid-cols-4"
-    >
-      {items.map((t, i) => (
-        <div
-          key={t.slug}
-          ref={(el) => {
-            cardRefs.current[i] = el;
-          }}
-          className="service-card group flex h-[440px] flex-col overflow-hidden rounded-3xl border border-parchment/10 bg-smoke shadow-[0_10px_30px_-8px_rgba(43,32,22,0.22)] transition-shadow duration-500 hover:shadow-[0_20px_45px_-12px_rgba(184,134,58,0.4)]"
-        >
-          {/* Image — top 60% of the card */}
-          <div className="relative h-[60%] w-full overflow-hidden">
-            <Image
-              src={t.image}
-              alt={`${t.title} treatment at Image Clinic`}
-              fill
-              sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, (max-width: 1280px) 31vw, 23vw"
-              className="service-media-img object-cover"
-            />
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 bg-gradient-to-t from-noir-deep/40 via-transparent to-transparent"
-            />
-          </div>
+    <>
+      {/* Phones: swipeable row with the next card peeking in.
+          Tablet and up: wrapped grid, the last row is centred. */}
+      <div
+        ref={gridRef}
+        className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-5 pt-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:snap-none sm:flex-wrap sm:justify-center sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 lg:gap-6"
+      >
+        {items.map((t, i) => (
+          <div
+            key={t.slug}
+            ref={(el) => {
+              cardRefs.current[i] = el;
+            }}
+            className="service-card group flex h-[410px] w-[78vw] max-w-[300px] flex-none snap-center flex-col overflow-hidden rounded-3xl border border-parchment/10 bg-smoke shadow-[0_10px_30px_-8px_rgba(43,32,22,0.22)] transition-shadow duration-500 hover:shadow-[0_20px_45px_-12px_rgba(184,134,58,0.4)] sm:h-[440px] sm:w-[calc(50%-0.625rem)] sm:max-w-none lg:w-[calc(33.333%-1rem)] xl:w-[calc(25%-1.125rem)]"
+          >
+            {/* Image — top 58% of the card */}
+            <div className="relative h-[58%] w-full overflow-hidden">
+              <CardImage t={t} />
+            </div>
 
-          {/* Text — bottom 40% of the card */}
-          <div className="flex flex-1 flex-col justify-center px-5 py-4">
-            <h3 className="font-display text-lg font-semibold leading-snug text-parchment">
-              {t.title.replace(/ LHR Treatment$/, "")}
-            </h3>
-            <p className="mt-1 text-[11px] font-semibold uppercase tracking-wider text-amber">
-              {t.tagline}
-            </p>
-            <p className="mt-2 text-sm leading-relaxed text-parchment/70 line-clamp-3">
-              {t.description}
-            </p>
+            {/* Text — bottom 42% of the card */}
+            <div className="flex flex-1 flex-col justify-center px-5 py-4">
+              <h3 className="font-display text-xl font-semibold leading-snug text-parchment">
+                {t.title}
+              </h3>
+              <p className="mt-1 text-[11px] font-semibold uppercase tracking-wider text-amber">
+                {t.tagline}
+              </p>
+              <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-parchment/70">
+                {t.description}
+              </p>
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+
+      <p className="mt-1 text-center text-xs tracking-wide text-parchment/50 sm:hidden">
+        Swipe to see more &rarr;
+      </p>
+    </>
   );
 }
 
@@ -173,7 +206,7 @@ export default function Services() {
   }, [activeCategory]);
 
   return (
-    <section id="services" className="bg-noir px-6 py-24 sm:px-10 lg:px-16">
+    <section id="services" className="bg-noir px-6 py-16 sm:px-10 sm:py-24 lg:px-16">
       {/* Structured data — lets search engines see every treatment even
           though the UI only ever renders one category's cards at a time. */}
       <script
@@ -184,15 +217,17 @@ export default function Services() {
 
       <div className="mx-auto max-w-7xl">
         <div ref={headingWrapRef} className="mx-auto max-w-2xl text-center">
-          <p className="eyebrow mb-4 justify-center">{current.eyebrow}</p>
-          <h2 className="font-display text-3xl font-semibold leading-snug text-parchment sm:text-4xl lg:text-5xl">
+          <p className="eyebrow mb-3 justify-center sm:mb-4">{current.eyebrow}</p>
+          <h2 className="font-display text-[2rem] font-semibold leading-snug text-parchment sm:text-4xl lg:text-5xl">
             {current.heading.split(" ").slice(0, -1).join(" ")}{" "}
             <span className="accent-italic">{current.heading.split(" ").slice(-1)}</span>
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-parchment/70">{current.subheading}</p>
+          <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-parchment/70 sm:mt-4 sm:max-w-none sm:text-base">
+            {current.subheading}
+          </p>
         </div>
 
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <div className="mt-7 flex items-center justify-center sm:mt-8">
           <div
             role="tablist"
             aria-label="Treatment categories"
@@ -209,7 +244,7 @@ export default function Services() {
                   aria-selected={isActive}
                   aria-controls={`panel-${c.id}`}
                   onClick={() => setActiveCategory(c.id)}
-                  className={`rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-wide transition-colors duration-200 sm:text-sm ${
+                  className={`min-h-10 rounded-full border px-3.5 py-2 text-[11px] font-semibold uppercase tracking-wide transition-colors duration-200 sm:px-5 sm:text-sm ${
                     isActive
                       ? "border-gold bg-gold text-noir-deep shadow-md shadow-gold/25"
                       : "border-parchment/20 bg-transparent text-parchment/70 hover:border-gold-soft/50 hover:text-parchment"
@@ -223,7 +258,7 @@ export default function Services() {
         </div>
 
         <div
-          className="mt-14"
+          className="mt-9 sm:mt-14"
           role="tabpanel"
           id={`panel-${current.id}`}
           aria-labelledby={`tab-${current.id}`}
