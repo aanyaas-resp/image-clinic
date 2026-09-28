@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
+import { createPortal } from "react-dom";
 import gsap from "gsap";
 
 type Treatment = {
@@ -96,9 +97,11 @@ const SERVICE_JSON_LD = {
   })),
 };
 
-/* Shows the photo; if a file is missing it shows a clean branded block
-   instead of a broken-image icon. */
-function CardImage({ t }: { t: Treatment }) {
+/* Shows the photo in a PORTRAIT frame (4:5). Very gentle zoom on hover only.
+   Clicking the photo opens it full screen (see Lightbox below).
+   If a file is missing it shows a clean branded block instead of a
+   broken-image icon (and is not clickable). */
+function CardImage({ t, onOpen }: { t: Treatment; onOpen: (t: Treatment) => void }) {
   const [failed, setFailed] = useState(false);
 
   if (failed) {
@@ -110,26 +113,123 @@ function CardImage({ t }: { t: Treatment }) {
   }
 
   return (
-    <>
+    <button
+      type="button"
+      onClick={() => onOpen(t)}
+      aria-label={`View ${t.title} photo full screen`}
+      className="absolute inset-0 block h-full w-full cursor-zoom-in focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+    >
       <Image
         src={imageFor(t.slug)}
         alt={`${t.title} treatment at Image Clinic`}
         fill
         sizes="(max-width: 640px) 78vw, (max-width: 1024px) 46vw, (max-width: 1280px) 31vw, 23vw"
-        className="service-media-img object-cover"
+        className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
         onError={() => setFailed(true)}
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-t from-noir-deep/40 via-transparent to-transparent"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-noir-deep/25 via-transparent to-transparent"
       />
-    </>
+      {/* small "expand" hint */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-noir-deep/60 text-parchment opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100"
+      >
+        <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+        </svg>
+      </span>
+    </button>
+  );
+}
+
+/* Full-screen viewer: shows the real, uncropped photo.
+   Closes with the X button, the Esc key, or a click on the dark backdrop. */
+function Lightbox({ t, onClose }: { t: Treatment; onClose: () => void }) {
+  const backdropRef = useRef<HTMLDivElement>(null);
+  const imgRef = useRef<HTMLImageElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+
+    // lock page scroll while open
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    closeRef.current?.focus();
+
+    gsap.fromTo(backdropRef.current, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.25, ease: "power1.out" });
+    gsap.fromTo(
+      imgRef.current,
+      { autoAlpha: 0, scale: 0.96 },
+      { autoAlpha: 1, scale: 1, duration: 0.35, ease: "power2.out" }
+    );
+
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [onClose]);
+
+  return createPortal(
+    <div
+      ref={backdropRef}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${t.title} photo`}
+      onClick={onClose}
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 sm:p-8"
+    >
+      <button
+        ref={closeRef}
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation();
+          onClose();
+        }}
+        aria-label="Close full screen photo"
+        className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-colors hover:bg-white/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold sm:right-6 sm:top-6"
+      >
+        <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+          <path d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+
+      {failed ? (
+        <p className="font-display text-2xl text-white/80">{t.title}</p>
+      ) : (
+        // Plain <img> on purpose: it keeps the photo's natural proportions
+        // (no cropping) and fits it inside the screen.
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          ref={imgRef}
+          src={imageFor(t.slug)}
+          alt={`${t.title} treatment at Image Clinic`}
+          onClick={(e) => e.stopPropagation()}
+          onError={() => setFailed(true)}
+          className="max-h-[88vh] max-w-full rounded-2xl object-contain shadow-2xl"
+        />
+      )}
+
+      <p className="pointer-events-none absolute bottom-4 left-0 right-0 text-center font-display text-base text-white/80 sm:bottom-6">
+        {t.title}
+      </p>
+    </div>,
+    document.body
   );
 }
 
 function TreatmentGrid({ items }: { items: Treatment[] }) {
   const gridRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [selected, setSelected] = useState<Treatment | null>(null);
+  const closeLightbox = useCallback(() => setSelected(null), []);
 
   useEffect(() => {
     const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
@@ -160,15 +260,15 @@ function TreatmentGrid({ items }: { items: Treatment[] }) {
             ref={(el) => {
               cardRefs.current[i] = el;
             }}
-            className="service-card group flex h-[410px] w-[78vw] max-w-[300px] flex-none snap-center flex-col overflow-hidden rounded-3xl border border-parchment/10 bg-smoke shadow-[0_10px_30px_-8px_rgba(43,32,22,0.22)] transition-shadow duration-500 hover:shadow-[0_20px_45px_-12px_rgba(184,134,58,0.4)] sm:h-[440px] sm:w-[calc(50%-0.625rem)] sm:max-w-none lg:w-[calc(33.333%-1rem)] xl:w-[calc(25%-1.125rem)]"
+            className="service-card group flex w-[78vw] max-w-[300px] flex-none snap-center flex-col overflow-hidden rounded-3xl border border-parchment/10 bg-smoke shadow-[0_10px_30px_-8px_rgba(43,32,22,0.22)] transition-shadow duration-500 hover:shadow-[0_20px_45px_-12px_rgba(184,134,58,0.4)] sm:w-[calc(50%-0.625rem)] sm:max-w-none lg:w-[calc(33.333%-1rem)] xl:w-[calc(25%-1.125rem)]"
           >
-            {/* Image — top 58% of the card */}
-            <div className="relative h-[58%] w-full overflow-hidden">
-              <CardImage t={t} />
+            {/* Image — portrait frame (4:5), real photo shown, no heavy crop */}
+            <div className="relative aspect-[4/4] w-full overflow-hidden">
+              <CardImage t={t} onOpen={setSelected} />
             </div>
 
-            {/* Text — bottom 42% of the card */}
-            <div className="flex flex-1 flex-col justify-center px-5 py-4">
+            {/* Text */}
+            <div className="flex min-h-[150px] flex-1 flex-col justify-center px-5 py-4">
               <h3 className="font-display text-xl font-semibold leading-snug text-parchment">
                 {t.title}
               </h3>
@@ -186,6 +286,8 @@ function TreatmentGrid({ items }: { items: Treatment[] }) {
       <p className="mt-1 text-center text-xs tracking-wide text-parchment/50 sm:hidden">
         Swipe to see more &rarr;
       </p>
+
+      {selected && <Lightbox t={selected} onClose={closeLightbox} />}
     </>
   );
 }
