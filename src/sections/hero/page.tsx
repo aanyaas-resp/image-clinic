@@ -27,7 +27,7 @@ export default function Hero() {
           (chocolate-deep is dark; "noir" in your theme is the light ivory colour.) */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-r from-chocolate-deep/65 via-chocolate-deep/55 to-chocolate-deep/65 lg:from-chocolate-deep/90 lg:via-chocolate-deep/80 lg:to-chocolate-deep/55"
+        className="absolute inset-0 bg-gradient-to-r from-chocolate-deep/65 via-chocolate-deep/55 to-chocolate-deep/65 lg:from-chocolate-deep/50 lg:via-chocolate-deep/50 lg:to-chocolate-deep/55"
       />
       {/* Soft gold glow */}
       <div

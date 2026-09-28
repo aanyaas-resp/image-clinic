@@ -37,7 +37,7 @@ const CATEGORIES: Category[] = [
     items: [
       { slug: "botox", label: "BOTOX", title: "Botox", tagline: "SMOOTH FINE LINES", description: "Botox softens expression lines and helps create a smoother, refreshed look while preserving natural facial movement." },
       { slug: "hifu", label: "HIFU", title: "HIFU", tagline: "LIFT & TIGHTEN", description: "HIFU uses focused ultrasound energy to lift and tighten the skin with minimal downtime and long-lasting definition." },
-      { slug: "sculptura", label: "SCULPTURA", title: "Sculptura", tagline: "BODY CONTOURING", description: "Sculptura helps refine and contour the silhouette for a more sculpted, balanced profile and smoother look." },
+      { slug: "sculptura", label: "SCULPTRA", title: "Sculptra", tagline: "BODY CONTOURING", description: "Sculptura helps refine and contour the silhouette for a more sculpted, balanced profile and smoother look." },
       { slug: "skin-booster", label: "SKIN BOOSTER", title: "Skin Booster", tagline: "DEEP HYDRATION", description: "Injectable hyaluronic acid boosters that hydrate from within for plump, smooth and naturally glowing skin." },
       { slug: "profhilo", label: "PROFHILO", title: "Profhilo", tagline: "BIO-REMODELLING", description: "A next-generation bio-remodelling injectable that improves skin laxity, hydration and overall firmness." },
     ],
@@ -68,8 +68,11 @@ const CATEGORIES: Category[] = [
       { slug: "prp-therapy", label: "PRP THERAPY", title: "PRP Therapy", tagline: "NATURAL REGROWTH", description: "Platelet-rich plasma therapy that harnesses your own growth factors to stimulate natural, healthier hair regrowth." },
       { slug: "exosomes", label: "EXOSOMES", title: "Exosomes", tagline: "CELLULAR REGROWTH", description: "Advanced exosome therapy that signals dormant follicles to reactivate, supporting thicker, healthier regrowth." },
       { slug: "hairfall-treatment", label: "HAIRFALL TREATMENT", title: "Hairfall Treatment", tagline: "REDUCE SHEDDING", description: "A targeted protocol that addresses the root causes of hairfall to reduce shedding and support fuller-looking hair." },
-      { slug: "dandruff-control", label: "DANDRUFF CONTROL", title: "Dandruff Control", tagline: "CALM, CLEAR SCALP", description: "Medical-grade scalp therapy that targets flaking and irritation for a calmer, healthier scalp." },
-      { slug: "hair-strengthening", label: "STRENGTHENING", title: "Hair Strengthening", tagline: "FORTIFY FROM ROOT", description: "Nutrient-infused strengthening therapy that fortifies hair from the root, reducing breakage and improving density." },
+      { slug: "gfc-therapy", label: "GFC THERAPY", title: "GFC Therapy", tagline: "GROWTH FACTOR", description: "Growth factor concentrate therapy designed to stimulate follicles, support regrowth and improve overall scalp vitality." },
+      { slug: "qr-678-therapy", label: "QR 678 THERAPY", title: "QR 678 Therapy", tagline: "SCALP REJUVENATION", description: "A regenerative scalp treatment formulated to reduce shedding and promote healthier, denser hair growth." },
+      { slug: "hair-mesotherapy", label: "HAIR MESOTHERAPY", title: "Hair Mesotherapy", tagline: "NOURISH & REVIVE", description: "Targeted nutrient delivery to the scalp that nourishes follicles, strengthens the hair shaft and supports healthy growth." },
+      { slug: "hair-transplant", label: "HAIR TRANSPLANT", title: "Hair Transplant", tagline: "LASTING COVERAGE", description: "A surgical hair restoration solution that redistributes healthy follicles for fuller, natural-looking coverage." },
+      { slug: "hair-thread-treatment", label: "HAIR THREAD TREATMENT", title: "Hair Thread Treatment", tagline: "NON-SURGICAL LIFT", description: "A minimally invasive scalp treatment that supports volume and density while promoting a healthier hair environment." },
     ],
   },
 ];

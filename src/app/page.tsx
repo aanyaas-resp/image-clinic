@@ -12,14 +12,14 @@ export default function Home() {
     <main>
       <Hero />
       <BrandOverview />
-      <Services />
+      {/* <Services /> */}
       <Gallery />
 
       <div id="all-results">
         <ResultsPage />
       </div>
 
-      <Reviews googleReviewsUrl="https://www.google.com/maps/search/?api=1&query=Image+Clinic+Greater+Kailash+New+Delhi" />
+      {/* <Reviews googleReviewsUrl="https://www.google.com/maps/search/?api=1&query=Image+Clinic+Greater+Kailash+New+Delhi" /> */}
       {/* <Contact /> */}
       <FAQPage />
     </main>
