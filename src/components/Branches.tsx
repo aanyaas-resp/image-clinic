@@ -15,12 +15,13 @@ export default function Branches() {
         <div className="grid gap-6 lg:grid-cols-2">
           {Object.values(BRANCHES).map((branch) => (
             <Link key={branch.slug} href={`/${branch.slug}`} className="group block">
-              <article className="overflow-hidden rounded-[1.75rem] border border-gold/15 bg-smoke shadow-[0_18px_45px_-22px_rgba(0,0,0,0.55)] transition-transform duration-300 hover:-translate-y-1 hover:border-gold/30">
+              <article className="overflow-hidden rounded-[1.75rem] border border-gold/15 bg-smoke shadow-[0_18px_45px_-22px_rgba(43,32,22,0.3)] transition-transform duration-300 hover:-translate-y-1 hover:border-gold/30">
                 <div className="relative h-56 w-full overflow-hidden">
                   <Image
-                    src={branch.slug === "greater-kailash" ? "/images/delhigalary2.jpg" : "/images/gurugram1.jpg"}
-                    alt={branch.area === "Greater Kailash" ? "Image Clinic Greater Kailash branch" : "Image Clinic Gurugram branch"}
+                    src={branch.heroImage}
+                    alt={`Image Clinic ${branch.area} branch`}
                     fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-noir-deep/80 via-noir-deep/15 to-transparent" />
@@ -29,7 +30,7 @@ export default function Branches() {
                       <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-parchment/80">Image Clinic</p>
                       <h4 className="mt-1 font-display text-2xl font-semibold">{branch.area}</h4>
                     </div>
-                    <div className="rounded-full border border-gold/30 bg-noir-deep/40 px-3 py-1 text-xs font-medium text-gold-soft backdrop-blur-sm">
+                    <div className="rounded-full border border-gold/30 bg-noir/80 px-3 py-1 text-xs font-medium text-amber">
                       {branch.location}
                     </div>
                   </div>
@@ -43,7 +44,7 @@ export default function Branches() {
 
                   <div className="flex items-center justify-between border-t border-gold/10 pt-4">
                     <span className="text-sm font-medium text-parchment/80">Visit clinic</span>
-                    <span className="inline-flex items-center gap-2 text-sm font-semibold text-gold-soft">
+                    <span className="inline-flex items-center gap-2 text-sm font-semibold text-amber">
                       View page <ArrowRight className="h-4 w-4" strokeWidth={2} />
                     </span>
                   </div>

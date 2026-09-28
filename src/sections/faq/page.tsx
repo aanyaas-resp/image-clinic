@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, ArrowUpRight } from "lucide-react";
-import BookingModal from "@/components/BookingModal";
+import { ChevronDown } from "lucide-react";
 
 const FAQS = [
   {
@@ -44,16 +43,15 @@ const FAQS = [
 
 export default function FAQPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-  const [isBookingOpen, setIsBookingOpen] = useState(false);
 
   return (
-    <main className="bg-noir px-6 py-24 sm:px-10 lg:px-16">
+    <section id="faq" className="bg-noir px-6 py-24 sm:px-10 lg:px-16">
       <div className="mx-auto max-w-3xl">
         <div className="text-center">
           <p className="eyebrow mb-4 justify-center">Questions & Answers</p>
-          <h1 className="font-display text-3xl font-semibold leading-snug text-parchment sm:text-4xl lg:text-5xl">
+          <h2 className="font-display text-3xl font-semibold leading-snug text-parchment sm:text-4xl lg:text-5xl">
             Frequently Asked <span className="accent-italic">Questions</span>
-          </h1>
+          </h2>
           <p className="mt-4 font-sans text-base leading-relaxed text-parchment/70">
             Everything you need to know before your visit to Image
             Clinic. Can&apos;t find your answer here? Reach out and we&apos;ll
@@ -104,9 +102,6 @@ export default function FAQPage() {
 
       </div>
 
-      {isBookingOpen && (
-        <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
-      )}
-    </main>
+    </section>
   );
 }

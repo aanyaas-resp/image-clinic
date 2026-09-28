@@ -49,7 +49,6 @@ export default function Contact({ branch }: { branch?: BranchConfig }) {
   const formRef = useRef<HTMLFormElement>(null);
 
   const CLINIC_NAME = activeBranch.name;
-  const CLINIC_WHATSAPP = activeBranch.whatsapp;
   const CLINIC_PHONES = [{ display: activeBranch.phoneDisplay, tel: activeBranch.phoneTel.replace(/\D/g, "") }];
   const CLINIC_ADDRESSES = visibleBranches.map((item) => ({ label: item.location, text: item.address, mapsLink: item.mapsLink }));
 

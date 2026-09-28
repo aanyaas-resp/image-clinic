@@ -1,4 +1,3 @@
-// sections/services/page.tsx
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -32,11 +31,11 @@ const CATEGORIES: Category[] = [
     subheading:
       "Injectable and regenerative protocols that firm, hydrate and restore facial definition over time.",
     items: [
-      { slug: "botox", image: "/services/fillers-compressed.jpg", label: "BOTOX", title: "Botox", tagline: "SMOOTH FINE LINES", description: "Botox softens expression lines and helps create a smoother, refreshed look while preserving natural facial movement." },
-      { slug: "mifu", image: "/services2/profhilo-compressed.jpg", label: "MIFU", title: "MIFU", tagline: "LIFT & TIGHTEN", description: "MIFU delivers a lifting, tightening effect to rejuvenate the skin with minimal downtime and long-lasting definition." },
-      { slug: "sculptura", image: "/services2/threads-compressed.jpg", label: "SCULPTURA", title: "Sculptura", tagline: "BODY CONTOURING", description: "Sculptura helps refine and contour the silhouette for a more sculpted, balanced profile and smoother look." },
-      { slug: "skin-booster", image: "/services2/skinbooster-compressed.jpg", label: "SKIN BOOSTER", title: "Skin Booster", tagline: "DEEP HYDRATION", description: "Injectable hyaluronic acid boosters that hydrate from within for plump, smooth and naturally glowing skin." },
-      { slug: "profhilo", image: "/services/propfilo-compressed.jpg", label: "PROFHILO", title: "Profhilo", tagline: "BIO-REMODELLING", description: "A next-generation bio-remodelling injectable that improves skin laxity, hydration and overall firmness." },
+      { slug: "botox", image: "/services/fillers.webp", label: "BOTOX", title: "Botox", tagline: "SMOOTH FINE LINES", description: "Botox softens expression lines and helps create a smoother, refreshed look while preserving natural facial movement." },
+      { slug: "mifu", image: "/services2/profhilo.webp", label: "MIFU", title: "MIFU", tagline: "LIFT & TIGHTEN", description: "MIFU delivers a lifting, tightening effect to rejuvenate the skin with minimal downtime and long-lasting definition." },
+      { slug: "sculptura", image: "/services2/threads.webp", label: "SCULPTURA", title: "Sculptura", tagline: "BODY CONTOURING", description: "Sculptura helps refine and contour the silhouette for a more sculpted, balanced profile and smoother look." },
+      { slug: "skin-booster", image: "/services2/skinbooster.webp", label: "SKIN BOOSTER", title: "Skin Booster", tagline: "DEEP HYDRATION", description: "Injectable hyaluronic acid boosters that hydrate from within for plump, smooth and naturally glowing skin." },
+      { slug: "profhilo", image: "/services/propfilo.webp", label: "PROFHILO", title: "Profhilo", tagline: "BIO-REMODELLING", description: "A next-generation bio-remodelling injectable that improves skin laxity, hydration and overall firmness." },
     ],
   },
   {
@@ -47,11 +46,11 @@ const CATEGORIES: Category[] = [
     subheading:
       "Targeted acne and skin renewal treatments to calm active breakouts and improve long-term texture.",
     items: [
-      { slug: "acne-acne-scar", image: "/services/acne-compressed.jpg", label: "ACNE & ACNE SCAR", title: "Acne & Acne Scar", tagline: "CLEARER, SMOOTHER SKIN", description: "Targeted clinical protocols that calm active breakouts and resurface acne scarring for a clearer, more even complexion." },
-      { slug: "dermapen-4", image: "/services/dermapen4-compressed.jpg", label: "DERMAPEN 4", title: "Dermapen 4", tagline: "MICRONEEDLING", description: "Advanced medical microneedling that stimulates collagen production to refine texture, scarring and overall skin quality." },
-      { slug: "whitening-pigmentation", image: "/services/skinpigm-compressed.jpg", label: "WHITENING & PIGMENTATION", title: "Whitening & Pigmentation", tagline: "EVEN, RADIANT TONE", description: "Medical-grade brightening combined with precision laser and peel therapy to fade pigmentation and even out skin tone." },
-      { slug: "korean-glass-skin", image: "/services/koreanglass-compressed.jpg", label: "KOREAN GLASS SKIN", title: "Korean Glass Skin", tagline: "DEWY, LUMINOUS FINISH", description: "A layered glow-boosting protocol that hydrates, refines pores and evens tone for that signature translucent, glass-like skin." },
-      { slug: "hydrafacial", image: "/services/hydrafacial-compressed.jpg", label: "HYDRAFACIAL", title: "HydraFacial", tagline: "DEEP CLEANSE", description: "A three-step medical-grade facial that clears out impurities and locks in hydration for instantly brighter skin." },
+      { slug: "acne-acne-scar", image: "/services/acne.webp", label: "ACNE & ACNE SCAR", title: "Acne & Acne Scar", tagline: "CLEARER, SMOOTHER SKIN", description: "Targeted clinical protocols that calm active breakouts and resurface acne scarring for a clearer, more even complexion." },
+      { slug: "dermapen-4", image: "/services/dermapen4.webp", label: "DERMAPEN 4", title: "Dermapen 4", tagline: "MICRONEEDLING", description: "Advanced medical microneedling that stimulates collagen production to refine texture, scarring and overall skin quality." },
+      { slug: "whitening-pigmentation", image: "/services/skinpigm.webp", label: "WHITENING & PIGMENTATION", title: "Whitening & Pigmentation", tagline: "EVEN, RADIANT TONE", description: "Medical-grade brightening combined with precision laser and peel therapy to fade pigmentation and even out skin tone." },
+      { slug: "korean-glass-skin", image: "/services/koreanglass.webp", label: "KOREAN GLASS SKIN", title: "Korean Glass Skin", tagline: "DEWY, LUMINOUS FINISH", description: "A layered glow-boosting protocol that hydrates, refines pores and evens tone for that signature translucent, glass-like skin." },
+      { slug: "hydrafacial", image: "/services2/hydrafacial.webp", label: "HYDRAFACIAL", title: "HydraFacial", tagline: "DEEP CLEANSE", description: "A three-step medical-grade facial that clears out impurities and locks in hydration for instantly brighter skin." },
     ],
   },
   {
@@ -62,11 +61,11 @@ const CATEGORIES: Category[] = [
     subheading:
       "Advanced scalp therapies built to reactivate follicles and support thicker, healthier regrowth.",
     items: [
-      { slug: "prp-therapy", image: "/services2/prptheropy-compressed.jpg", label: "PRP THERAPY", title: "PRP Therapy", tagline: "NATURAL REGROWTH", description: "Platelet-rich plasma therapy that harnesses your own growth factors to stimulate natural, healthier hair regrowth." },
-      { slug: "exosomes", image: "/services2/exosomes-compressed.jpg", label: "EXOSOMES", title: "Exosomes", tagline: "CELLULAR REGROWTH", description: "Advanced exosome therapy that signals dormant follicles to reactivate, supporting thicker, healthier regrowth." },
-      { slug: "hairfall-treatment", image: "/services2/hairfalltreatment-compressed.jpg", label: "HAIRFALL TREATMENT", title: "Hairfall Treatment", tagline: "REDUCE SHEDDING", description: "A targeted protocol that addresses the root causes of hairfall to reduce shedding and support fuller-looking hair." },
-      { slug: "dandruff-control", image: "/services2/dandruff-compressed.jpg", label: "DANDRUFF CONTROL", title: "Dandruff Control", tagline: "CALM, CLEAR SCALP", description: "Medical-grade scalp therapy that targets flaking and irritation for a calmer, healthier scalp." },
-      { slug: "hair-strengthening", image: "/services2/strengthening-compressed.jpg", label: "STRENGTHENING", title: "Hair Strengthening", tagline: "FORTIFY FROM ROOT", description: "Nutrient-infused strengthening therapy that fortifies hair from the root, reducing breakage and improving density." },
+      { slug: "prp-therapy", image: "/services2/prptheropy.webp", label: "PRP THERAPY", title: "PRP Therapy", tagline: "NATURAL REGROWTH", description: "Platelet-rich plasma therapy that harnesses your own growth factors to stimulate natural, healthier hair regrowth." },
+      { slug: "exosomes", image: "/services2/exosomes.webp", label: "EXOSOMES", title: "Exosomes", tagline: "CELLULAR REGROWTH", description: "Advanced exosome therapy that signals dormant follicles to reactivate, supporting thicker, healthier regrowth." },
+      { slug: "hairfall-treatment", image: "/services2/hairfalltreatment.webp", label: "HAIRFALL TREATMENT", title: "Hairfall Treatment", tagline: "REDUCE SHEDDING", description: "A targeted protocol that addresses the root causes of hairfall to reduce shedding and support fuller-looking hair." },
+      { slug: "dandruff-control", image: "/services2/dandruff.webp", label: "DANDRUFF CONTROL", title: "Dandruff Control", tagline: "CALM, CLEAR SCALP", description: "Medical-grade scalp therapy that targets flaking and irritation for a calmer, healthier scalp." },
+      { slug: "hair-strengthening", image: "/services2/strengthening.webp", label: "STRENGTHENING", title: "Hair Strengthening", tagline: "FORTIFY FROM ROOT", description: "Nutrient-infused strengthening therapy that fortifies hair from the root, reducing breakage and improving density." },
     ],
   },
 ];
@@ -120,13 +119,13 @@ function TreatmentGrid({ items }: { items: Treatment[] }) {
           ref={(el) => {
             cardRefs.current[i] = el;
           }}
-          className="service-card group flex h-[440px] flex-col overflow-hidden rounded-3xl border border-parchment/10 bg-smoke shadow-[0_10px_30px_-6px_rgba(0,0,0,0.5)] transition-shadow duration-500 hover:shadow-[0_20px_45px_-10px_rgba(201,161,59,0.35)]"
+          className="service-card group flex h-[440px] flex-col overflow-hidden rounded-3xl border border-parchment/10 bg-smoke shadow-[0_10px_30px_-8px_rgba(43,32,22,0.22)] transition-shadow duration-500 hover:shadow-[0_20px_45px_-12px_rgba(184,134,58,0.4)]"
         >
           {/* Image — top 60% of the card */}
           <div className="relative h-[60%] w-full overflow-hidden">
             <Image
               src={t.image}
-              alt={`${t.title} at Image Clinic, Kailash Garden, Delhi`}
+              alt={`${t.title} treatment at Image Clinic`}
               fill
               sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, (max-width: 1280px) 31vw, 23vw"
               className="service-media-img object-cover"
@@ -142,7 +141,7 @@ function TreatmentGrid({ items }: { items: Treatment[] }) {
             <h3 className="font-display text-lg font-semibold leading-snug text-parchment">
               {t.title.replace(/ LHR Treatment$/, "")}
             </h3>
-            <p className="mt-1 text-[11px] font-semibold uppercase tracking-wider text-gold-soft">
+            <p className="mt-1 text-[11px] font-semibold uppercase tracking-wider text-amber">
               {t.tagline}
             </p>
             <p className="mt-2 text-sm leading-relaxed text-parchment/70 line-clamp-3">

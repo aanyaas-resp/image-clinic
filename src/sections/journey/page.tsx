@@ -31,7 +31,7 @@ const STEPS = [
   },
 ];
 
-export default function JourneySection() {
+export default function JourneySection({ area }: { area: string }) {
   const sectionRef = useRef<HTMLElement>(null);
   const eyebrowRef = useRef<HTMLParagraphElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -179,11 +179,10 @@ export default function JourneySection() {
 
         {/* Image column */}
         <div ref={imageColRef} className="relative mx-auto w-full max-w-lg lg:mx-0 lg:max-w-none">
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[20px] shadow-[0_16px_48px_rgba(20,16,11,0.14)] ring-1 ring-inset ring-noir/10 sm:rounded-[24px]">
-            {/* TODO: replace with a real treatment-room photo if this isn't it, e.g. "/journey/treatment.jpg" */}
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[20px] shadow-[0_16px_48px_rgba(43,32,22,0.16)] ring-1 ring-inset ring-noir/10 sm:rounded-[24px]">
             <Image
-              src="/images/main-image-1.png"
-              alt="Dermatologist performing a skin treatment at Image Clinic, Greater Kailash, Delhi"
+              src="/images/galarynew2.webp"
+              alt={`Dermatologist performing a skin treatment at Image Clinic, ${area}`}
               fill
               sizes="(max-width: 640px) 92vw, (max-width: 1024px) 80vw, 45vw"
               className="object-cover"
@@ -197,7 +196,7 @@ export default function JourneySection() {
             className="absolute -bottom-8 -left-6 flex h-28 w-28 flex-col items-center justify-center rounded-full bg-gold text-center shadow-[0_12px_32px_rgba(20,16,11,0.25)] sm:h-32 sm:w-32"
           >
             <p className="font-display text-sm font-semibold text-noir-deep">Trusted in</p>
-            <p className="font-display text-sm font-semibold text-noir-deep">Greater Kailash</p>
+            <p className="font-display text-sm font-semibold text-noir-deep">{area}</p>
           </div>
         </div>
       </div>

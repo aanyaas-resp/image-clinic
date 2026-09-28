@@ -179,7 +179,7 @@ export default function Gallery() {
               }}
               type="button"
               onClick={() => setLightboxIndex(index)}
-              className="group relative aspect-[4/5] overflow-hidden rounded-3xl text-left shadow-[0_10px_30px_-6px_rgba(0,0,0,0.45)] outline-none transition-shadow duration-500 hover:shadow-[0_20px_45px_-10px_rgba(201,161,59,0.3)] focus-visible:ring-4 focus-visible:ring-gold-soft/40"
+              className="group relative aspect-[4/5] overflow-hidden rounded-3xl text-left shadow-[0_10px_30px_-8px_rgba(43,32,22,0.25)] outline-none transition-shadow duration-500 hover:shadow-[0_20px_45px_-12px_rgba(184,134,58,0.35)] focus-visible:ring-4 focus-visible:ring-gold-soft/40"
             >
               <div className="absolute inset-0 overflow-hidden">
                 <Image
@@ -194,7 +194,7 @@ export default function Gallery() {
 
               <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-noir-deep/70 via-noir-deep/5 to-transparent" />
 
-              <span className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-noir-deep/80 text-gold-soft shadow-sm backdrop-blur-sm">
+              <span className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-noir-deep/80 text-gold-soft shadow-sm">
                 <ZoomIn className="h-4 w-4" strokeWidth={1.75} />
               </span>
 
@@ -226,7 +226,7 @@ export default function Gallery() {
           aria-label="Photo gallery viewer"
           tabIndex={-1}
           ref={dialogRef}
-          className="lightbox-backdrop fixed inset-0 z-[100] flex items-center justify-center bg-noir-deep/95 px-4 backdrop-blur-sm outline-none"
+          className="lightbox-backdrop fixed inset-0 z-[100] flex items-center justify-center bg-noir-deep/95 px-4 outline-none"
           onClick={closeLightbox}
         >
           <p className="absolute left-1/2 top-5 -translate-x-1/2 text-xs font-semibold uppercase tracking-[0.14em] text-parchment/60">
@@ -256,7 +256,13 @@ export default function Gallery() {
 
           <div className="flex w-full max-w-3xl flex-col items-center" onClick={(e) => e.stopPropagation()}>
             <div key={lightboxIndex} className="lightbox-image relative aspect-[4/3] w-full overflow-hidden rounded-3xl ring-1 ring-inset ring-gold-soft/20">
-              <Image src={GALLERY[lightboxIndex].image} alt={GALLERY[lightboxIndex].caption} fill className="object-cover" />
+              <Image
+                src={GALLERY[lightboxIndex].image}
+                alt={GALLERY[lightboxIndex].caption}
+                fill
+                sizes="(max-width: 768px) 92vw, 768px"
+                className="object-cover"
+              />
               <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-noir-deep/90 via-transparent to-transparent" />
               <p className="absolute inset-x-6 bottom-6 font-sans text-sm font-medium leading-relaxed text-parchment sm:text-base">{GALLERY[lightboxIndex].caption}</p>
             </div>

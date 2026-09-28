@@ -4,7 +4,6 @@ import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import SmoothScroll from "@/app/Smoothscroll";
 import FloatingContactButtons from "@/components/FloatingContactButtons";
 
 // Cormorant Garamond — soft, candlelit serif for headings/logo type.
@@ -94,7 +93,7 @@ const LOCAL_BUSINESS_JSON_LD = {
   "@context": "https://schema.org",
   "@type": "MedicalBusiness",
   name: "Image Clinic",
-  image: `${SITE_URL}/og-image.png`,
+  image: `${SITE_URL}og-image.png`,
   telephone: "+91-7044107484",
   address: {
     "@type": "PostalAddress",
@@ -146,12 +145,11 @@ export default function RootLayout({
           }}
         />
 
-      
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=AW-18375995180"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="google-tag" strategy="afterInteractive">
+        <Script id="google-tag" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -162,10 +160,10 @@ export default function RootLayout({
       </head>
       <body>
         <Navbar />
-        <SmoothScroll>
-          {children}
-          <Footer />
-        </SmoothScroll>
+        {children}
+        <Footer />
+        {/* Root level so it stays fixed; only shows on branch pages (see component). */}
+        <FloatingContactButtons />
       </body>
     </html>
   );

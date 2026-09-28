@@ -29,9 +29,7 @@ const QUICK_LINKS = [
   { label: "Gurugram", href: "/gurugram" },
   { label: "Services", href: "/#services" },
   { label: "Results", href: "/#results" },
-  { label: "Journey", href: "/#journey" },
   { label: "Gallery", href: "/#gallery" },
-  { label: "Full Results", href: "/#all-results" },
   { label: "Contact", href: "/#contact" },
   { label: "FAQ", href: "/#faq" },
 ];
@@ -73,11 +71,11 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative overflow-hidden bg-parchment px-5 py-14 sm:px-10 sm:py-16 lg:px-16">
+    <footer className="relative overflow-hidden bg-noir-deep px-5 py-14 sm:px-10 sm:py-16 lg:px-16">
       {/* Ambient accents */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-24 -top-24 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(201,161,59,0.14),transparent_65%)]"
+        className="pointer-events-none absolute -right-24 -top-24 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(184,134,58,0.14),transparent_65%)]"
       />
       <div
         aria-hidden="true"
@@ -98,7 +96,7 @@ export default function Footer() {
                 className="h-auto w-full object-contain object-left"
               />
             </Link>
-            <p className="mt-3 max-w-xs font-sans text-sm leading-relaxed text-noir-deep/65">
+            <p className="mt-3 max-w-xs font-sans text-sm leading-relaxed text-parchment/65">
               Advanced skin, hair and aesthetic care in Kailash Garden and Gurugram — expert-led, result-driven treatment plans.
             </p>
             <div className="mt-5 flex items-center gap-3">
@@ -109,7 +107,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-noir-deep/15 text-noir-deep/70 transition-all duration-200 hover:-translate-y-0.5 hover:border-gold hover:text-gold"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-parchment/15 text-parchment/70 transition-all duration-200 hover:-translate-y-0.5 hover:border-gold hover:text-gold"
                 >
                   <Icon className="h-4 w-4" />
                 </a>
@@ -119,7 +117,7 @@ export default function Footer() {
 
           {/* Quick links */}
           <div>
-            <p className="font-sans text-xs font-semibold uppercase tracking-[0.18em] text-noir-deep/45">
+            <p className="font-sans text-xs font-semibold uppercase tracking-[0.18em] text-parchment/45">
               Quick Links
             </p>
             <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5 sm:block sm:space-y-2.5">
@@ -128,7 +126,7 @@ export default function Footer() {
                   <Link
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
-                    className="group inline-flex items-center gap-1 font-sans text-sm text-noir-deep/70 transition-colors duration-200 hover:text-gold"
+                    className="group inline-flex items-center gap-1 font-sans text-sm text-parchment/70 transition-colors duration-200 hover:text-gold"
                   >
                     {link.label}
                     <ArrowUpRight
@@ -143,7 +141,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <p className="font-sans text-xs font-semibold uppercase tracking-[0.18em] text-noir-deep/45">
+            <p className="font-sans text-xs font-semibold uppercase tracking-[0.18em] text-parchment/45">
               Contact
             </p>
             <ul className="mt-4 space-y-3.5">
@@ -155,7 +153,7 @@ export default function Footer() {
                   href={MAPS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-sans text-sm leading-relaxed text-noir-deep/70 transition-colors duration-200 hover:text-gold"
+                  className="font-sans text-sm leading-relaxed text-parchment/70 transition-colors duration-200 hover:text-gold"
                 >
                   {ADDRESS}
                 </a>
@@ -166,7 +164,7 @@ export default function Footer() {
                 </span>
                 <a
                   href={`tel:${PHONE_TEL}`}
-                  className="font-sans text-sm text-noir-deep/70 transition-colors duration-200 hover:text-gold"
+                  className="font-sans text-sm text-parchment/70 transition-colors duration-200 hover:text-gold"
                 >
                   {PHONE_DISPLAY}
                 </a>
@@ -177,7 +175,7 @@ export default function Footer() {
                 </span>
                 <a
                   href={`mailto:${EMAIL}`}
-                  className="font-sans text-sm text-noir-deep/70 transition-colors duration-200 hover:text-gold"
+                  className="font-sans text-sm text-parchment/70 transition-colors duration-200 hover:text-gold"
                 >
                   {EMAIL}
                 </a>
@@ -186,18 +184,18 @@ export default function Footer() {
           </div>
 
           {/* Quick contact */}
-          <div className="rounded-2xl border border-gold/20 bg-noir-deep/[0.03] p-5 sm:p-6 lg:border-none lg:bg-transparent lg:p-0">
-            <p className="font-sans text-xs font-semibold uppercase tracking-[0.18em] text-noir-deep/45">
+          <div className="rounded-2xl border border-gold/20 bg-parchment/[0.04] p-5 sm:p-6 lg:border-none lg:bg-transparent lg:p-0">
+            <p className="font-sans text-xs font-semibold uppercase tracking-[0.18em] text-parchment/45">
               Ready When You Are
             </p>
-            <p className="mt-4 font-sans text-sm leading-relaxed text-noir-deep/65">
+            <p className="mt-4 font-sans text-sm leading-relaxed text-parchment/65">
               Reach out directly and start your treatment plan today.
             </p>
             <div className="mt-5 flex items-center gap-3">
               <a
                 href={`tel:${PHONE_TEL}`}
                 aria-label="Call Image Clinic"
-                className="flex h-11 w-11 items-center justify-center rounded-full bg-gold text-noir-deep shadow-md shadow-gold/30 transition-transform duration-300 hover:scale-[1.06] hover:bg-gold-soft active:scale-[0.98]"
+                className="flex h-11 w-11 items-center justify-center rounded-full bg-gold text-noir shadow-md shadow-gold/30 transition-transform duration-300 hover:scale-[1.06] hover:bg-gold-soft active:scale-[0.98]"
               >
                 <Phone className="h-4 w-4" strokeWidth={2} />
               </a>
@@ -206,7 +204,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Message Image Clinic on WhatsApp"
-                className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-noir-deep/15 bg-noir-deep/5 text-noir-deep shadow-sm transition-transform duration-300 hover:scale-[1.06] hover:border-gold hover:bg-gold hover:text-noir-deep active:scale-[0.98]"
+                className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-parchment/15 bg-parchment/5 text-parchment shadow-sm transition-transform duration-300 hover:scale-[1.06] hover:border-gold hover:bg-gold hover:text-noir active:scale-[0.98]"
               >
                 <MessageCircle className="h-4 w-4" strokeWidth={2} />
               </a>
@@ -214,17 +212,17 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-noir-deep/10 pt-6 sm:mt-14 sm:flex-row">
-          <p className="font-sans text-xs text-noir-deep/45">
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-parchment/10 pt-6 sm:mt-14 sm:flex-row">
+          <p className="font-sans text-xs text-parchment/45">
             © {year} {CLINIC_NAME}. All rights reserved.
           </p>
 
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-5">
             <div className="flex gap-5">
-              <Link href="/legal#privacy" className="font-sans text-xs text-noir-deep/45 hover:text-gold">
+              <Link href="/legal#privacy" className="font-sans text-xs text-parchment/45 hover:text-gold">
                 Privacy Policy
               </Link>
-              <Link href="/legal#terms" className="font-sans text-xs text-noir-deep/45 hover:text-gold">
+              <Link href="/legal#terms" className="font-sans text-xs text-parchment/45 hover:text-gold">
                 Terms of Service
               </Link>
             </div>
@@ -234,10 +232,10 @@ export default function Footer() {
               href="https://aniketwebdev.in"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-sans text-xs text-noir-deep/45 transition-colors duration-200 hover:text-gold"
+              className="font-sans text-xs text-parchment/45 transition-colors duration-200 hover:text-gold"
             >
               Made by{" "}
-              <span className="font-medium text-noir-deep/60 hover:text-gold">
+              <span className="font-medium text-parchment/60 hover:text-gold">
                 aniketwebdev.in
               </span>
             </a>

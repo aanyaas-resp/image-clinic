@@ -1,20 +1,28 @@
 @import "tailwindcss";
 
-/* Tailwind v4 auto-detects content, but these folders sit outside app/,
-   so point it at them explicitly to be safe. */
-@source "./app";
-@source "./components";
-@source "./sections";
+/* Tailwind v4 auto-detects content; these point at the folders that sit
+   outside app/ (paths are relative to this file). */
+@source "../components";
+@source "../sections";
 
 @theme {
   /* --- Image Clinic brand palette: light, golden-lit luxury (ivory & champagne) --- */
   --color-noir: #faf6ef;        /* main background — warm ivory / champagne base */
-  --color-noir-deep: #efe4d0;   /* deeper panel — footer, elevated cards */
+  --color-noir-deep: #efe4d0;   /* deeper panel — elevated cards */
   --color-gold: #b8863a;        /* primary brand — logo, CTAs, headings */
   --color-gold-soft: #d9b26b;   /* soft shimmer gold — highlight, hovers */
-  --color-amber: #7a5122;       /* deep bronze/amber — secondary links, icons */
+  --color-amber: #7a5122;       /* deep bronze/amber — labels, secondary links */
   --color-parchment: #2b2016;   /* espresso ink — primary text on light surfaces */
   --color-smoke: #f3e9d8;       /* card & divider surface — subtle warm ivory tone */
+
+  /* Legacy palette aliases used across the clinic pages */
+  --color-ivory: #f7f1ea;
+  --color-cream: #fffaf3;
+  --color-cream-white: #fffdfb;
+  --color-chocolate: #2b2016;
+  --color-chocolate-deep: #1a120d;
+  --color-bronze: #b8863a;
+  --color-taupe: #d8c5a7;
 
   --font-display: var(--font-display-family), Georgia, serif;   /* Cormorant Garamond */
   --font-sans: var(--font-sans-family), -apple-system, system-ui, sans-serif; /* Jost */
@@ -51,7 +59,7 @@
 }
 
 @layer components {
-  /* Small caps kicker above section headings — Italiana, wide tracking, glowing gold */
+  /* Small caps kicker above section headings — Italiana, wide tracking, gold */
   .eyebrow {
     @apply inline-flex items-center gap-2 font-accent text-xs font-semibold uppercase tracking-[0.22em] text-gold;
   }
@@ -73,17 +81,23 @@
     @apply btn-pill border-2 border-gold/35 text-parchment hover:border-gold/60 hover:bg-gold/8;
   }
 
-  /* Shared input style for glass-panel forms (Hero consultation form, BookingModal) */
+  /* Form fields — ivory inputs with a gold focus ring, for the light cards */
+  .form-label {
+    @apply mb-2 block text-xs font-semibold uppercase tracking-[0.15em] text-amber;
+  }
   .input-glass {
-    @apply w-full rounded-xl border border-white/15 bg-[#0b171b]/75 px-4 py-3 text-sm text-white placeholder:text-white/45 outline-none transition focus:ring-2 focus:ring-gold-soft;
+    @apply w-full rounded-xl border border-parchment/20 bg-cream-white px-4 py-3 text-sm text-parchment outline-none transition placeholder:text-parchment/40 focus:border-gold focus:ring-2 focus:ring-gold/30;
+  }
+  .input-group {
+    @apply flex overflow-hidden rounded-xl border border-parchment/20 bg-cream-white transition focus-within:border-gold focus-within:ring-2 focus-within:ring-gold/30;
   }
 
-  /* Small round nav buttons for the mobile services scroller */
+  /* Small round nav buttons for the horizontal scrollers */
   .scroll-nav-btn {
     @apply flex h-9 w-9 items-center justify-center rounded-full border border-gold/25 bg-smoke text-amber shadow-md shadow-noir-deep/20 transition hover:bg-gold hover:text-noir active:scale-95 disabled:pointer-events-none disabled:opacity-30;
   }
 
-  /* Services row: horizontal snap-scroll on mobile/tablet, plain 4-col
+  /* Card rows: horizontal snap-scroll on mobile/tablet, plain 4-col
      grid on desktop — no scrolling needed once there's room for a row. */
   .services-scroll {
     @apply flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4 lg:grid lg:grid-cols-4 lg:gap-6 lg:overflow-visible lg:pb-0 lg:snap-none;
@@ -96,50 +110,13 @@
   .services-scroll > * {
     @apply w-[78vw] flex-none snap-center sm:w-[60vw] lg:w-auto;
   }
-  .doctors-scroll > * {
-    @apply lg:w-[23vw];
-  }
 
-  /* Card reveal-on-scroll (JS toggles .is-visible) */
-  .card-reveal {
-    opacity: 0;
-    transform: translateY(28px) scale(0.97);
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .card-reveal.is-visible {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-
-  /* Image zoom on hover inside a service/doctor card */
+  /* Image zoom on hover inside a service card */
   .service-media-img {
     transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .service-card:hover .service-media-img,
-  .service-card.is-active .service-media-img {
+  .service-card:hover .service-media-img {
     transform: scale(1.08);
-  }
-
-  /* Bottom label — visible at rest, fades out when the hover overlay takes over */
-  .service-label {
-    opacity: 1;
-    transition: opacity 0.35s ease;
-  }
-  .service-card:hover .service-label,
-  .service-card.is-active .service-label {
-    opacity: 0;
-  }
-
-  /* Full hover overlay with details + Book Now — hidden at rest */
-  .service-overlay {
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 0.35s ease, transform 0.35s ease;
-  }
-  .service-card:hover .service-overlay,
-  .service-card.is-active .service-overlay {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -150,13 +127,21 @@
     @apply pointer-events-none absolute inset-x-0 bottom-0 z-6 h-10 w-full text-noir sm:h-16;
   }
 
-  /* Signature brand texture — soft, golden ambient glow on warm ivory.
-     Used sparingly as the site's one recurring visual signature. */
-  .marble-texture {
-    background-image:
-      radial-gradient(ellipse 60% 50% at 15% 20%, rgba(184, 134, 58, 0.14), transparent 55%),
-      radial-gradient(ellipse 55% 45% at 85% 75%, rgba(217, 178, 107, 0.12), transparent 55%),
-      linear-gradient(115deg, transparent 42%, rgba(122, 81, 34, 0.1) 50%, transparent 58%);
+  /* Hero entrance — pure CSS (no JS), so the heading is visible at first paint
+     instead of waiting for hydration. Stagger with e.g. `[--d:120ms]`. */
+  @keyframes riseIn {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .rise-in {
+    animation: riseIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: var(--d, 0ms);
   }
 
   @keyframes pingSlow {
@@ -175,10 +160,8 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .card-reveal,
+    .rise-in,
     .service-media-img,
-    .service-label,
-    .service-overlay,
     .animate-ping-slow {
       animation: none !important;
       transition: none !important;

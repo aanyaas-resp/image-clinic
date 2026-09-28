@@ -1,9 +1,8 @@
 "use client";
 
 import { Phone } from "lucide-react";
-import { BRANCHES, type BranchConfig } from "@/data/branches";
-
-const DEFAULT_BRANCH = BRANCHES["greater-kailash"];
+import { usePathname } from "next/navigation";
+import { findBranch } from "@/data/branches";
 
 const WHATSAPP_MESSAGE =
   "Hi! I'd like to know more about Image Clinic and book an appointment.";
@@ -21,51 +20,53 @@ function WhatsAppIcon({ className }: { className?: string }) {
   );
 }
 
-export default function FloatingContactButtons({ branch = DEFAULT_BRANCH }: { branch?: BranchConfig }) {
-  const activeBranch = branch ?? DEFAULT_BRANCH;
-  const PHONE_DISPLAY = activeBranch.phoneDisplay;
-  const whatsappHref = `https://wa.me/${activeBranch.whatsapp}?text=${encodeURIComponent(
-    WHATSAPP_MESSAGE
-  )}`;
+/**
+ * Rendered once from the root layout (outside any transformed/scrolling wrapper,
+ * so `position: fixed` stays truly fixed). It only appears on a branch page and
+ * uses that branch's own number: /gurugram -> Gurugram, /greater-kailash -> Delhi.
+ * On the main URL (and every other route) it renders nothing.
+ */
+export default function FloatingContactButtons() {
+  const pathname = usePathname() ?? "/";
+  const branch = findBranch(pathname.split("/").filter(Boolean)[0]);
 
-  const telHref = `tel:+${activeBranch.phoneTel.replace(/\D/g, "")}`;
+  if (!branch) return null;
+
+  const whatsappHref = `https://wa.me/${branch.whatsapp}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+  const telHref = `tel:${branch.phoneTel}`;
 
   return (
-    <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3 sm:bottom-7 sm:right-7">
-      {/* Call Button — icon only, matches WhatsApp button's size/shape */}
+    <div className="fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-5 z-40 flex flex-col items-end gap-3 sm:bottom-7 sm:right-7">
+      {/* Call button */}
       <a
         href={telHref}
-        aria-label={`Call now at ${PHONE_DISPLAY}`}
+        aria-label={`Call Image Clinic ${branch.area} at ${branch.phoneDisplay}`}
         className="group relative flex items-center"
       >
-        {/* Tooltip */}
-        <span className="pointer-events-none absolute right-full mr-3 whitespace-nowrap rounded-full border border-taupe/60 bg-ivory px-4 py-2 text-xs font-semibold tracking-wide text-chocolate opacity-0 shadow-lg transition-all duration-300 group-hover:opacity-100 group-hover:mr-4">
-          Call {activeBranch.area}
+        <span className="pointer-events-none absolute right-full mr-3 hidden whitespace-nowrap rounded-full border border-taupe/60 bg-ivory px-4 py-2 text-xs font-semibold tracking-wide text-chocolate opacity-0 shadow-lg transition-opacity duration-300 group-hover:opacity-100 sm:block">
+          Call {branch.area}
         </span>
 
-        <span className="relative flex h-14 w-14 items-center justify-center rounded-full border border-bronze/40 bg-chocolate text-cream shadow-xl shadow-chocolate/25 transition-all duration-300 hover:-translate-y-1 hover:bg-chocolate-deep hover:shadow-2xl active:scale-95">
+        <span className="relative flex h-14 w-14 items-center justify-center rounded-full border border-gold/40 bg-chocolate text-cream shadow-xl shadow-chocolate/25 transition-transform duration-300 hover:-translate-y-1 hover:bg-chocolate-deep active:scale-95">
           <Phone className="h-6 w-6 stroke-[1.8]" />
         </span>
       </a>
 
-      {/* WhatsApp Button — icon only */}
+      {/* WhatsApp button */}
       <a
         href={whatsappHref}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chat with us on WhatsApp"
+        aria-label={`Chat with Image Clinic ${branch.area} on WhatsApp`}
         className="group relative flex items-center"
       >
-        {/* Tooltip */}
-        <span className="pointer-events-none absolute right-full mr-3 whitespace-nowrap rounded-full border border-taupe/60 bg-ivory px-4 py-2 text-xs font-semibold tracking-wide text-chocolate opacity-0 shadow-lg transition-all duration-300 group-hover:opacity-100 group-hover:mr-4">
-          Chat on WhatsApp {activeBranch.area}
+        <span className="pointer-events-none absolute right-full mr-3 hidden whitespace-nowrap rounded-full border border-taupe/60 bg-ivory px-4 py-2 text-xs font-semibold tracking-wide text-chocolate opacity-0 shadow-lg transition-opacity duration-300 group-hover:opacity-100 sm:block">
+          Chat on WhatsApp {branch.area}
         </span>
 
-        {/* Soft bronze pulse */}
-        <span className="absolute inset-0 rounded-full bg-bronze/30 animate-ping-slow" />
+        <span className="absolute inset-0 rounded-full bg-gold/30 animate-ping-slow" />
 
-        {/* Button */}
-        <span className="relative flex h-14 w-14 items-center justify-center rounded-full border border-bronze/50 bg-cream text-chocolate shadow-xl shadow-chocolate/20 transition-all duration-300 hover:-translate-y-1 hover:bg-chocolate hover:text-cream hover:shadow-2xl active:scale-95">
+        <span className="relative flex h-14 w-14 items-center justify-center rounded-full border border-gold/50 bg-cream text-chocolate shadow-xl shadow-chocolate/20 transition-transform duration-300 hover:-translate-y-1 hover:bg-chocolate hover:text-cream active:scale-95">
           <WhatsAppIcon className="h-6 w-6" />
         </span>
       </a>

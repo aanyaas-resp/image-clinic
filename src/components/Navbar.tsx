@@ -66,7 +66,7 @@ export default function Navbar() {
         <nav
           className={`flex items-center justify-between gap-3 transition-all duration-500 ease-out ${
             isCompact
-              ? "rounded-[12px] border border-gold/15 bg-noir-deep/85 px-4 py-2.5 shadow-[0_8px_30px_-6px_rgba(0,0,0,0.5)] backdrop-blur-xl sm:px-5"
+              ? "rounded-[12px] border border-gold/15 bg-noir/90 px-4 py-2.5 shadow-[0_8px_30px_-8px_rgba(43,32,22,0.25)] backdrop-blur-md sm:px-5"
               : "rounded-none border-transparent bg-transparent px-2 py-4 sm:py-5"
           }`}
         >
@@ -86,7 +86,6 @@ export default function Navbar() {
               }`}
               priority
             />
-            
           </Link>
 
           {/* Desktop links */}
@@ -130,7 +129,7 @@ export default function Navbar() {
             isMobileOpen ? "mt-2 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
           }`}
         >
-          <div className="overflow-hidden rounded-3xl border border-gold/15 bg-noir-deep/90 shadow-[0_8px_30px_-6px_rgba(0,0,0,0.5)] backdrop-blur-xl">
+          <div className="overflow-hidden rounded-3xl border border-gold/15 bg-noir/95 shadow-[0_8px_30px_-8px_rgba(43,32,22,0.25)] backdrop-blur-md">
             <ul className="flex flex-col gap-1 px-4 pb-2 pt-3">
               {NAV_LINKS.map((link) => (
                 <li key={link.label}>
