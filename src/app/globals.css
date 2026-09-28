@@ -159,10 +159,24 @@
     animation: pingSlow 2.5s cubic-bezier(0, 0, 0.2, 1) infinite;
   }
 
+  @keyframes whatsappNudge {
+    0%, 88%, 100% { transform: rotate(0deg) scale(1); }
+    90% { transform: rotate(-7deg) scale(1.04); }
+    92% { transform: rotate(7deg) scale(1.04); }
+    94% { transform: rotate(-5deg) scale(1.03); }
+    96% { transform: rotate(5deg) scale(1.02); }
+    98% { transform: rotate(0deg) scale(1); }
+  }
+  .animate-wa-nudge {
+    animation: whatsappNudge 5s ease-in-out infinite;
+    transform-origin: center;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .rise-in,
     .service-media-img,
-    .animate-ping-slow {
+    .animate-ping-slow,
+    .animate-wa-nudge {
       animation: none !important;
       transition: none !important;
       opacity: 1 !important;

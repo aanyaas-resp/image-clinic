@@ -35,17 +35,17 @@ export default function Hero() {
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_55%_50%_at_15%_25%,rgba(184,134,58,0.18),transparent_60%),radial-gradient(ellipse_50%_45%_at_88%_80%,rgba(217,178,107,0.14),transparent_60%)]"
       />
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-24 pt-36 sm:px-10 sm:pt-40 lg:px-16">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-20 pt-28 sm:px-10 sm:pb-24 sm:pt-40 lg:px-16">
         <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
           <p className="rise-in eyebrow mb-4 text-gold-soft [--d:50ms]">{HOME_BRAND.name}</p>
 
-          <h1 className="rise-in font-display text-[2.75rem] font-semibold leading-[1.1] text-cream-white [text-shadow:0_2px_12px_rgba(0,0,0,0.45)] sm:text-6xl lg:text-7xl [--d:120ms]">
+          <h1 className="rise-in font-display text-[clamp(2.15rem,9vw,3.5rem)] font-semibold leading-[1.05] text-cream-white [text-shadow:0_2px_12px_rgba(0,0,0,0.45)] sm:text-6xl lg:text-7xl [--d:120ms]">
             <span className="bg-gradient-to-r from-gold via-gold-soft to-gold bg-clip-text pr-1 italic text-transparent">
               Best
             </span>{" "}
             Hair &amp; Skin Treatment
-            <br />
-            in Image Clinic
+            <br className="hidden sm:block" />
+            <span className="sm:whitespace-nowrap">in Image Clinic</span>
           </h1>
 
           <p className="rise-in mx-auto mt-5 max-w-[19rem] font-sans text-[15px] leading-relaxed text-cream-white/90 [text-shadow:0_1px_8px_rgba(0,0,0,0.5)] sm:max-w-sm sm:text-base [--d:200ms]">
@@ -54,7 +54,7 @@ export default function Hero() {
           </p>
 
           {/* Minimal buttons: side by side, only as wide as their content */}
-          <div className="rise-in mt-6 flex flex-wrap items-center justify-center gap-2.5 [--d:280ms]">
+          <div className="rise-in mt-6 flex w-full flex-col items-stretch justify-center gap-2.5 [--d:280ms] sm:w-auto sm:flex-row sm:items-center">
             <a href="#clinics" className="btn-pill-solid group !px-5 !py-2.5 !text-[13px]">
               <MapPin className="h-3.5 w-3.5 shrink-0" strokeWidth={2.25} />
               <span>Our Clinics</span>

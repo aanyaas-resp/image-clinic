@@ -3,14 +3,12 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
-  { label: "Greater Kailash", href: "/greater-kailash" },
-  { label: "Gurugram", href: "/gurugram" },
-  { label: "Services", href: "/#services" },
+  { label: "Clinics", href: "/#clinics" },
   { label: "Results", href: "/#all-results" },
   { label: "FAQ", href: "/#faq" },
 ];
@@ -19,6 +17,7 @@ const SCROLL_THRESHOLD = 48;
 
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -52,22 +51,19 @@ export default function Navbar() {
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
       window.history.replaceState(null, "", `/#${id}`);
     } else {
-      window.location.href = `/#${id}`;
+      router.push(`/#${id}`);
     }
   };
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
-      <div
-        className={`mx-auto transition-all duration-500 ease-out ${
-          isCompact ? "max-w-3xl px-3 pt-3 sm:px-4 sm:pt-4 lg:max-w-4xl" : "max-w-7xl px-4 pt-0 sm:px-6 lg:px-16"
-        }`}
-      >
+    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-6 sm:pt-5">
+      <div className="mx-auto max-w-7xl">
         <nav
-          className={`flex items-center justify-between gap-3 transition-all duration-500 ease-out ${
+          aria-label="Main navigation"
+          className={`flex items-center justify-between gap-3 rounded-2xl border px-4 py-2.5 shadow-[0_8px_30px_-8px_rgba(43,32,22,0.2)] backdrop-blur-xl transition-colors duration-300 sm:px-6 sm:py-3 ${
             isCompact
-              ? "rounded-[12px] border border-gold/15 bg-noir/90 px-4 py-2.5 shadow-[0_8px_30px_-8px_rgba(43,32,22,0.25)] backdrop-blur-md sm:px-5"
-              : "rounded-none border-transparent bg-transparent px-2 py-4 sm:py-5"
+              ? "border-gold/20 bg-noir/95"
+              : "border-cream-white/20 bg-chocolate-deep/35"
           }`}
         >
           {/* Logo */}
@@ -81,24 +77,22 @@ export default function Navbar() {
               alt="Image Clinic logo"
               width={180}
               height={52}
-              className={`h-auto w-auto object-contain transition-all duration-500 ${
-                isCompact ? "max-h-8 sm:max-h-9" : "max-h-10 sm:max-h-12"
-              }`}
+              className="h-auto w-auto max-h-9 object-contain sm:max-h-10"
               priority
             />
           </Link>
 
           {/* Desktop links */}
-          <ul className="hidden items-center gap-4 lg:flex xl:gap-6">
+          <ul className="hidden items-center gap-2 lg:flex xl:gap-3">
             {NAV_LINKS.map((link) => (
               <li key={link.label}>
                 <Link
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`whitespace-nowrap font-sans text-sm font-medium transition-colors duration-300 ${
+                  className={`whitespace-nowrap rounded-full px-3 py-2 font-sans text-sm font-medium transition-colors duration-200 ${
                     isCompact
-                      ? "text-parchment/80 hover:text-gold"
-                      : "text-parchment/90 hover:text-parchment"
+                      ? "text-parchment/80 hover:bg-gold/10 hover:text-amber"
+                      : "text-cream-white/90 hover:bg-cream-white/10 hover:text-cream-white"
                   }`}
                 >
                   {link.label}
@@ -113,7 +107,7 @@ export default function Navbar() {
             onClick={() => setIsMobileOpen((open) => !open)}
             aria-expanded={isMobileOpen}
             aria-label={isMobileOpen ? "Close menu" : "Open menu"}
-            className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-colors duration-300 lg:hidden ${
+            className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-colors duration-300 lg:hidden ${
               isCompact
                 ? "border-gold/20 text-parchment"
                 : "border-gold/25 text-parchment"
@@ -129,7 +123,7 @@ export default function Navbar() {
             isMobileOpen ? "mt-2 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
           }`}
         >
-          <div className="overflow-hidden rounded-3xl border border-gold/15 bg-noir/95 shadow-[0_8px_30px_-8px_rgba(43,32,22,0.25)] backdrop-blur-md">
+          <div className="overflow-hidden rounded-2xl border border-gold/15 bg-noir/95 shadow-[0_8px_30px_-8px_rgba(43,32,22,0.25)] backdrop-blur-md">
             <ul className="flex flex-col gap-1 px-4 pb-2 pt-3">
               {NAV_LINKS.map((link) => (
                 <li key={link.label}>

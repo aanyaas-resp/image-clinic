@@ -203,14 +203,15 @@ function ContactForm({ clinicWhatsapp }: { clinicWhatsapp: string }) {
   }
 
   return (
-    <div className="rounded-3xl border border-parchment/10 bg-smoke p-7 shadow-xl shadow-gold/15 sm:p-9">
+    <div className="relative overflow-hidden rounded-3xl border border-white/45 bg-white/70 p-5 shadow-2xl shadow-black/15 backdrop-blur-2xl sm:p-8 lg:p-9">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white to-transparent" />
       <h3 className="font-display text-2xl font-semibold text-parchment">Send Us a Message</h3>
       <p className="mt-2 text-sm text-parchment/60">
         You&apos;ll be redirected to WhatsApp to confirm.
       </p>
 
       {status === "sent" ? (
-        <div className="mt-8 rounded-2xl border border-gold-soft/30 bg-gold-soft/10 px-5 py-6 text-center">
+        <div className="mt-8 rounded-2xl border border-gold/25 bg-white/45 px-5 py-6 text-center backdrop-blur-lg">
           <p className="font-semibold text-parchment">Thank you! 🎉</p>
           <p className="mt-1 text-sm text-parchment/70">
             Continue on WhatsApp — we&apos;ll get back to you shortly.
@@ -230,7 +231,7 @@ function ContactForm({ clinicWhatsapp }: { clinicWhatsapp: string }) {
               placeholder="John Doe"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="input-glass"
+              className="input-glass border-white/70 bg-white/55 shadow-sm backdrop-blur-lg focus:bg-white/80"
             />
           </div>
 
@@ -238,7 +239,7 @@ function ContactForm({ clinicWhatsapp }: { clinicWhatsapp: string }) {
             <label htmlFor="c-phone" className="form-label">
               Phone
             </label>
-            <div className="input-group">
+            <div className="input-group border-white/70 bg-white/55 shadow-sm backdrop-blur-lg focus-within:bg-white/80">
               <span className="flex items-center border-r border-parchment/20 px-4 text-sm text-parchment/70">
                 +91
               </span>
@@ -267,7 +268,7 @@ function ContactForm({ clinicWhatsapp }: { clinicWhatsapp: string }) {
                 required
                 value={treatment}
                 onChange={(e) => setTreatment(e.target.value)}
-                className="input-glass appearance-none pr-10"
+                className="input-glass appearance-none border-white/70 bg-white/55 pr-10 shadow-sm backdrop-blur-lg focus:bg-white/80"
               >
                 <option value="" disabled>
                   Select Treatment...
@@ -293,13 +294,13 @@ function ContactForm({ clinicWhatsapp }: { clinicWhatsapp: string }) {
               placeholder="Tell us a bit about what you're looking for..."
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className="input-glass resize-none"
+              className="input-glass resize-none border-white/70 bg-white/55 shadow-sm backdrop-blur-lg focus:bg-white/80"
             />
           </div>
 
           {error && <p className="rounded-xl bg-red-500/10 px-3 py-2 text-sm text-red-700">{error}</p>}
 
-          <button type="submit" className="btn-pill-solid w-full justify-center">
+          <button type="submit" className="inline-flex w-full items-center justify-center rounded-full border border-white/45 bg-[#25D366]/85 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-[#128C7E]/20 backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:bg-[#128C7E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#128C7E] focus-visible:ring-offset-2">
             Send via WhatsApp
           </button>
         </form>

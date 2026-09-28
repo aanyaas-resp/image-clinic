@@ -5,11 +5,12 @@ import { BRANCHES } from "@/data/branches";
 
 export default function Branches() {
   return (
-    <section id="clinics" className="bg-noir px-6 py-20 sm:px-10 lg:px-16">
+    <section id="clinics" className="bg-noir px-4 py-16 sm:px-10 sm:py-20 lg:px-16">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-8">
-          <p className="eyebrow">Our Clinics</p>
-          <h3 className="mt-2 font-display text-3xl font-semibold text-parchment">Choose your nearest branch</h3>
+        <div className="mb-8 text-center sm:mb-10">
+          <p className="eyebrow justify-center">Our Clinics</p>
+          <h2 className="mt-2 font-display text-3xl font-semibold text-parchment sm:text-4xl">Find your nearest clinic</h2>
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-parchment/70 sm:text-base">Visit us in Greater Kailash or Gurugram. Get directions or explore each clinic page.</p>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-2">
@@ -51,6 +52,27 @@ export default function Branches() {
                 </div>
               </article>
             </Link>
+          ))}
+        </div>
+
+        <div className="mt-8 grid gap-5 lg:grid-cols-2">
+          {Object.values(BRANCHES).map((branch) => (
+            <article key={`${branch.slug}-map`} className="overflow-hidden rounded-3xl border border-gold/15 bg-smoke">
+              <div className="flex flex-wrap items-start justify-between gap-3 p-5 sm:p-6">
+                <div className="min-w-0">
+                  <h3 className="font-display text-xl font-semibold text-parchment">{branch.area}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-parchment/70">{branch.address}</p>
+                </div>
+                <a href={branch.directionsUrl} target="_blank" rel="noopener noreferrer" className="btn-pill-solid !px-4 !py-2 !text-xs">Get directions</a>
+              </div>
+              <iframe
+                title={`Map to Image Clinic ${branch.area}`}
+                src={branch.mapEmbedSrc}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="block h-64 w-full border-0 sm:h-72"
+              />
+            </article>
           ))}
         </div>
       </div>

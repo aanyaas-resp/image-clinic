@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Phone, Mail, MapPin, MessageCircle, ArrowUpRight } from "lucide-react";
-import { HOME_BRAND } from "@/data/branches";
+import { BRANCHES, HOME_BRAND } from "@/data/branches";
 
 function InstagramIcon({ className }: { className?: string }) {
   return (
@@ -42,13 +42,10 @@ const CLINIC_NAME = "Image Clinic";
 const PHONE_DISPLAY = "+91 70441 07484";
 const PHONE_TEL = "+917044107484";
 const EMAIL = "info@bestskillclinic.in";
-const ADDRESS = "E-84, Hansraj Gupta Road, Greater Kailash-1, New Delhi, Delhi 110048";
-const MAPS_URL =
-  "https://maps.google.com/?q=E-84+Hansraj+Gupta+Road+Greater+Kailash-1+New+Delhi+110048";
-
 export default function Footer() {
   const year = new Date().getFullYear();
   const pathname = usePathname();
+  const router = useRouter();
   const isHome = pathname === "/";
 
   const handleNavClick = (
@@ -66,7 +63,7 @@ export default function Footer() {
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
       window.history.replaceState(null, "", `/#${id}`);
     } else {
-      window.location.href = `/#${id}`;
+      router.push(`/#${id}`);
     }
   };
 
@@ -145,19 +142,24 @@ export default function Footer() {
               Contact
             </p>
             <ul className="mt-4 space-y-3.5">
-              <li className="flex items-start gap-2.5">
-                <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gold/10">
-                  <MapPin className="h-3.5 w-3.5 text-gold" strokeWidth={1.75} />
-                </span>
-                <a
-                  href={MAPS_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-sans text-sm leading-relaxed text-parchment/70 transition-colors duration-200 hover:text-gold"
-                >
-                  {ADDRESS}
-                </a>
-              </li>
+              {Object.values(BRANCHES).map((branch) => (
+                <li key={branch.slug} className="flex items-start gap-2.5">
+                  <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gold/10">
+                    <MapPin className="h-3.5 w-3.5 text-gold" strokeWidth={1.75} />
+                  </span>
+                  <div className="min-w-0">
+                    <p className="font-sans text-xs font-semibold uppercase tracking-wide text-parchment/50">{branch.area}</p>
+                    <a
+                      href={branch.directionsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-sans text-sm leading-relaxed text-parchment/70 transition-colors duration-200 hover:text-gold"
+                    >
+                      {branch.address}
+                    </a>
+                  </div>
+                </li>
+              ))}
               <li className="flex items-center gap-2.5">
                 <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gold/10">
                   <Phone className="h-3.5 w-3.5 text-gold" strokeWidth={1.75} />

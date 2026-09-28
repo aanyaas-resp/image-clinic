@@ -52,7 +52,7 @@ export const BRANCHES: Record<BranchSlug, BranchConfig> = {
     googleReviewsUrl: "https://maps.app.goo.gl/ZnwzU5A4VfZ2dGRAA",
     reviewRating: "4.9 / 5",
     heroBadge: "Trusted in Greater Kailash",
-    heroImage: "/images/delhigalary2.webp",
+    heroImage: "/images/gallery-1.webp",
     heroAlt: "Image Clinic — clinic exterior in Greater Kailash, Delhi",
     resultImage: "/result/result-1.webp",
     resultAlt: "Before and after skin treatment results at Image Clinic, Greater Kailash, Delhi",

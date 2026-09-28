@@ -111,7 +111,7 @@ export default function Contact({ branch }: { branch?: BranchConfig }) {
   const selectClass = "w-full appearance-none rounded-xl border border-chocolate-deep/15 bg-cream py-3 pl-11 pr-9 text-sm text-chocolate-deep outline-none transition-colors duration-200 focus:border-bronze focus:ring-2 focus:ring-bronze/30";
 
   return (
-    <section ref={sectionRef} id="contact" className="bg-ivory px-6 py-24 sm:px-10 lg:px-16">
+    <section ref={sectionRef} id="contact" className="bg-ivory px-4 py-16 sm:px-10 sm:py-24 lg:px-16">
       <div className="mx-auto max-w-7xl">
         <div ref={headingWrapRef} className="mx-auto max-w-2xl text-center">
           <p className="eyebrow mb-4 justify-center">Get In Touch</p>
@@ -119,7 +119,7 @@ export default function Contact({ branch }: { branch?: BranchConfig }) {
           <p className="mt-4 text-base leading-relaxed text-chocolate-deep/70">Have a question or ready to book your consultation? Reach out and our team will get back to you shortly.</p>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-8 lg:grid-cols-5 lg:gap-10">
+        <div className="mt-10 grid grid-cols-1 gap-6 sm:mt-14 sm:gap-8 lg:grid-cols-5 lg:gap-10">
           <div className="lg:col-span-2">
             <div className="space-y-4">
               <div ref={(el) => { cardRefs.current[1] = el; }} className="rounded-2xl border border-chocolate-deep/10 bg-cream/70 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-bronze/60 hover:shadow-[0_10px_28px_rgba(94,59,21,0.12)]">
@@ -156,7 +156,7 @@ export default function Contact({ branch }: { branch?: BranchConfig }) {
           </div>
 
           <div className="lg:col-span-3">
-            <form ref={formRef} onSubmit={handleSubmit} className="rounded-3xl border border-chocolate-deep/10 bg-cream/70 p-6 shadow-[0_10px_30px_-6px_rgba(94,59,21,0.15)] sm:p-8">
+            <form ref={formRef} onSubmit={handleSubmit} className="rounded-3xl border border-chocolate-deep/10 bg-cream/70 p-4 shadow-[0_10px_30px_-6px_rgba(94,59,21,0.15)] sm:p-8">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {!branch && (
                   <div className="relative sm:col-span-2">
