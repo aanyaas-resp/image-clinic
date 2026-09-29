@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://www.imageclinic.in/sitemap.xml",
+    sitemap: new URL("/sitemap.xml", "https://www.imageclinic.in").toString(),
   };
 }
