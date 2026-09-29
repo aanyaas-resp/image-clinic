@@ -62,7 +62,7 @@ export const BRANCHES: Record<BranchSlug, BranchConfig> = {
     heroBadge: "Trusted in Greater Kailash",
     heroImage: "/images/gallery-1.webp",
     heroAlt: "Image Clinic — clinic exterior in Greater Kailash, Delhi",
-    resultImage: "/result/result-1.webp",
+    resultImage: "/result/result-7.webp",
     resultAlt: "Before and after skin treatment results at Image Clinic, Greater Kailash, Delhi",
   },
   gurugram: {
@@ -94,7 +94,7 @@ export const BRANCHES: Record<BranchSlug, BranchConfig> = {
     heroBadge: "Trusted in Gurugram",
     heroImage: "/images/gurugram1.webp",
     heroAlt: "Image Clinic — clinic exterior in Gurugram",
-    resultImage: "/result/result-2.webp",
+    resultImage: "/result/result-7.webp",
     resultAlt: "Before and after skin treatment results at Image Clinic, Gurugram",
   },
 };
