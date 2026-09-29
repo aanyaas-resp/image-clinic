@@ -3,8 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { Phone, Mail, MapPin, MessageCircle, ArrowUpRight } from "lucide-react";
-import { BRANCHES, HOME_BRAND } from "@/data/branches";
+import { MapPin, ArrowUpRight } from "lucide-react";
+import { BRANCHES } from "@/data/branches";
 
 function InstagramIcon({ className }: { className?: string }) {
   return (
@@ -39,9 +39,7 @@ const SOCIALS = [
 ];
 
 const CLINIC_NAME = "Image Clinic";
-const PHONE_DISPLAY = "+91 70441 07484";
-const PHONE_TEL = "+917044107484";
-const EMAIL = "info@bestskillclinic.in";
+
 export default function Footer() {
   const year = new Date().getFullYear();
   const pathname = usePathname();
@@ -80,9 +78,9 @@ export default function Footer() {
       />
 
       <div className="relative mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-12 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-12 lg:grid-cols-3">
           {/* Brand */}
-          <div className="lg:col-span-1">
+          <div>
             <Link href="/" aria-label="Image Clinic home" className="block w-full">
               <Image
                 src="/images/image_clinic_logo-1.webp"
@@ -136,10 +134,10 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Locations */}
           <div>
             <p className="font-sans text-xs font-semibold uppercase tracking-[0.18em] text-parchment/45">
-              Contact
+              Our Locations
             </p>
             <ul className="mt-4 space-y-3.5">
               {Object.values(BRANCHES).map((branch) => (
@@ -160,57 +158,7 @@ export default function Footer() {
                   </div>
                 </li>
               ))}
-              <li className="flex items-center gap-2.5">
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gold/10">
-                  <Phone className="h-3.5 w-3.5 text-gold" strokeWidth={1.75} />
-                </span>
-                <a
-                  href={`tel:${PHONE_TEL}`}
-                  className="font-sans text-sm text-parchment/70 transition-colors duration-200 hover:text-gold"
-                >
-                  {PHONE_DISPLAY}
-                </a>
-              </li>
-              <li className="flex items-center gap-2.5">
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gold/10">
-                  <Mail className="h-3.5 w-3.5 text-gold" strokeWidth={1.75} />
-                </span>
-                <a
-                  href={`mailto:${EMAIL}`}
-                  className="font-sans text-sm text-parchment/70 transition-colors duration-200 hover:text-gold"
-                >
-                  {EMAIL}
-                </a>
-              </li>
             </ul>
-          </div>
-
-          {/* Quick contact */}
-          <div className="rounded-2xl border border-gold/20 bg-parchment/[0.04] p-5 sm:p-6 lg:border-none lg:bg-transparent lg:p-0">
-            <p className="font-sans text-xs font-semibold uppercase tracking-[0.18em] text-parchment/45">
-              Ready When You Are
-            </p>
-            <p className="mt-4 font-sans text-sm leading-relaxed text-parchment/65">
-              Reach out directly and start your treatment plan today.
-            </p>
-            <div className="mt-5 flex items-center gap-3">
-              <a
-                href={`tel:${PHONE_TEL}`}
-                aria-label="Call Image Clinic"
-                className="flex h-11 w-11 items-center justify-center rounded-full bg-gold text-noir shadow-md shadow-gold/30 transition-transform duration-300 hover:scale-[1.06] hover:bg-gold-soft active:scale-[0.98]"
-              >
-                <Phone className="h-4 w-4" strokeWidth={2} />
-              </a>
-              <a
-                href={`https://wa.me/${HOME_BRAND.whatsapp}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Message Image Clinic on WhatsApp"
-                className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-parchment/15 bg-parchment/5 text-parchment shadow-sm transition-transform duration-300 hover:scale-[1.06] hover:border-gold hover:bg-gold hover:text-noir active:scale-[0.98]"
-              >
-                <MessageCircle className="h-4 w-4" strokeWidth={2} />
-              </a>
-            </div>
           </div>
         </div>
 
@@ -236,7 +184,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="font-sans text-xs text-parchment/45 transition-colors duration-200 hover:text-gold"
             >
-              Made by{" "}
+              Designed &amp; developed by{" "}
               <span className="font-medium text-parchment/60 hover:text-gold">
                 aniketwebdev.in
               </span>
@@ -246,4 +194,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+  }
