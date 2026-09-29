@@ -42,11 +42,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Image Clinic | Hair, Skin & Aesthetic Care in Kailash Garden and Gurugram",
+    default: "Image Clinic | Hair & Skin Clinic in Delhi and Gurugram",
     template: "%s | Image Clinic",
   },
   description:
-    "Image Clinic offers advanced hair, skin and aesthetic care in Kailash Garden and Gurugram with doctor-led treatments and personalised care.",
+    "Doctor-led hair, skin and aesthetic treatments at Image Clinic in Greater Kailash, Delhi and Gurugram. Explore services, real results and clinic locations.",
   keywords: [
     "Image Clinic",
     "hair clinic Kailash Garden",
@@ -62,26 +62,22 @@ export const metadata: Metadata = {
     apple: "/images/image_clinic_logo-1.webp",
   },
   openGraph: {
-    title: "Image Clinic | Hair, Skin & Aesthetic Care in Kailash Garden and Gurugram",
+    title: "Image Clinic | Hair & Skin Clinic in Delhi and Gurugram",
     description:
-      "Image Clinic combines expert-led dermatology, hair care and aesthetic treatments to deliver modern, personalised results in Delhi and Gurugram.",
+      "Doctor-led hair, skin and aesthetic treatments at Image Clinic in Greater Kailash, Delhi and Gurugram.",
     url: SITE_URL,
     siteName: "Image Clinic",
-    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    images: ["/opengraph-image"],
     locale: "en_IN",
     type: "website",
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Image Clinic | Hair, Skin & Aesthetic Care in Kailash Garden and Gurugram",
+    title: "Image Clinic | Hair & Skin Clinic in Delhi and Gurugram",
     description:
-      "Image Clinic combines expert-led dermatology, hair care and aesthetic treatments to deliver modern, personalised results in Delhi and Gurugram.",
-    images: ["/og-image.png"],
-  },
-
-  alternates: {
-    canonical: SITE_URL,
+      "Doctor-led hair, skin and aesthetic treatments at Image Clinic in Greater Kailash, Delhi and Gurugram.",
+    images: ["/opengraph-image"],
   },
   robots: {
     index: true,
@@ -89,40 +85,14 @@ export const metadata: Metadata = {
   },
 };
 
-const LOCAL_BUSINESS_JSON_LD = {
+const ORGANIZATION_JSON_LD = {
   "@context": "https://schema.org",
-  "@type": "MedicalBusiness",
+  "@type": "Organization",
   name: "Image Clinic",
-  image: `${SITE_URL}og-image.png`,
-  telephone: "+91-7044107484",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "E-84, Hansraj Gupta Road, Greater Kailash-1",
-    addressLocality: "New Delhi",
-    addressRegion: "DL",
-    postalCode: "110048",
-    addressCountry: "IN",
-  },
   url: SITE_URL,
+  logo: `${SITE_URL}images/image_clinic_logo-1.webp`,
   sameAs: [
     "https://www.instagram.com/imageclinicindia/",
-    "https://www.google.com/maps/search/?api=1&query=Image+Clinic+Greater+Kailash+New+Delhi",
-  ],
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday",
-      ],
-      opens: "10:30",
-      closes: "20:30",
-    },
   ],
 };
 
@@ -139,9 +109,8 @@ export default function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(LOCAL_BUSINESS_JSON_LD),
+            __html: JSON.stringify(ORGANIZATION_JSON_LD),
           }}
         />
 

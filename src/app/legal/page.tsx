@@ -3,7 +3,25 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Privacy Policy & Terms of Service",
   description:
-    "Privacy Policy and Terms of Service for Image Clinic in Kailash Garden and Gurugram.",
+    "Read the privacy policy and terms of service for Image Clinic, with locations in Greater Kailash, Delhi and Gurugram.",
+  alternates: { canonical: "/legal" },
+  openGraph: {
+    title: "Privacy Policy & Terms of Service | Image Clinic",
+    description:
+      "Read the privacy policy and terms of service for Image Clinic, with locations in Greater Kailash, Delhi and Gurugram.",
+    url: "https://www.imageclinic.in/legal",
+    siteName: "Image Clinic",
+    images: ["/opengraph-image"],
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Privacy Policy & Terms of Service | Image Clinic",
+    description:
+      "Read the privacy policy and terms of service for Image Clinic, with locations in Greater Kailash, Delhi and Gurugram.",
+    images: ["/opengraph-image"],
+  },
 };
 
 const CLINIC_NAME = "Image Clinic";

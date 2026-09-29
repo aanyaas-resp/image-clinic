@@ -22,14 +22,14 @@ export default function BranchRealResult({ branch }: { branch: BranchConfig }) {
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 lg:grid-cols-2 lg:gap-20">
         {/* Before / After — single image containing both halves */}
         <div className="mx-auto w-full max-w-lg lg:mx-0 lg:max-w-none">
-          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[24px] shadow-[0_16px_48px_rgba(43,32,22,0.18)] ring-1 ring-inset ring-gold/25 sm:rounded-[28px]">
+          <div className="relative aspect-square w-full overflow-hidden rounded-[24px] shadow-[0_16px_48px_rgba(43,32,22,0.18)] ring-1 ring-inset ring-gold/25 sm:rounded-[28px]">
             <Image
               src={branch.resultImage}
               alt={branch.resultAlt}
               fill
               sizes="(max-width: 640px) 92vw, (max-width: 1024px) 80vw, 45vw"
               quality={80}
-              className="object-cover"
+              className="object-contain"
             />
           </div>
 

@@ -9,8 +9,48 @@ import BranchFaq from "./BranchFaq";
 import BranchContact from "./BranchContact";
 
 export default function BranchPage({ branch }: { branch: BranchConfig }) {
+  const branchJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "MedicalClinic",
+    "@id": `https://www.imageclinic.in/${branch.slug}#clinic`,
+    name: `Image Clinic ${branch.area}`,
+    image: `https://www.imageclinic.in${branch.heroImage}`,
+    url: `https://www.imageclinic.in/${branch.slug}`,
+    telephone: branch.phoneTel,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: branch.addressStreet,
+      addressLocality: branch.addressLocality,
+      addressRegion: branch.addressRegion,
+      postalCode: branch.postalCode,
+      addressCountry: "IN",
+    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
+        opens: "10:00",
+        closes: "20:00",
+      },
+    ],
+  };
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(branchJsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
       <BranchHero branch={branch} />
       <Services />
       <BranchRealResult branch={branch} />

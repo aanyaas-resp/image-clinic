@@ -124,7 +124,7 @@ function CardImage({ t, onOpen }: { t: Treatment; onOpen: (t: Treatment) => void
         alt={`${t.title} treatment at Image Clinic`}
         fill
         sizes="(max-width: 640px) 78vw, (max-width: 1024px) 46vw, (max-width: 1280px) 31vw, 23vw"
-        className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+        className="object-contain object-center"
         onError={() => setFailed(true)}
       />
       <div
@@ -263,7 +263,7 @@ function TreatmentGrid({ items }: { items: Treatment[] }) {
             className="service-card group flex w-[78vw] max-w-[300px] flex-none snap-center flex-col overflow-hidden rounded-3xl border border-parchment/10 bg-smoke shadow-[0_10px_30px_-8px_rgba(43,32,22,0.22)] transition-shadow duration-500 hover:shadow-[0_20px_45px_-12px_rgba(184,134,58,0.4)] sm:w-[calc(50%-0.625rem)] sm:max-w-none lg:w-[calc(33.333%-1rem)] xl:w-[calc(25%-1.125rem)]"
           >
             {/* Image — portrait frame (4:5), real photo shown, no heavy crop */}
-            <div className="relative aspect-[4/4] w-full overflow-hidden">
+            <div className="relative aspect-square w-full overflow-hidden">
               <CardImage t={t} onOpen={setSelected} />
             </div>
 

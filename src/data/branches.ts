@@ -10,6 +10,10 @@ export type BranchConfig = {
   pageTitle: string;
   description: string;
   address: string;
+  addressStreet: string;
+  addressLocality: string;
+  addressRegion: string;
+  postalCode: string;
   /** Two-line version of the address for the contact card */
   addressLines: [string, string];
   phoneDisplay: string;
@@ -36,10 +40,14 @@ export const BRANCHES: Record<BranchSlug, BranchConfig> = {
     area: "Greater Kailash",
     location: "Greater Kailash (Delhi)",
     place: "Greater Kailash, Delhi",
-    pageTitle: "Image Clinic — Greater Kailash | Best Hair & Skin Clinic in Greater Kailash",
+    pageTitle: "Hair & Skin Clinic in Greater Kailash, Delhi",
     description:
       "Best hair and skin clinic in Greater Kailash for advanced aesthetic, skin and hair treatments with doctor-led care.",
     address: "E-84, Hansraj Gupta Road, Greater Kailash-1, New Delhi, Delhi 110048",
+    addressStreet: "E-84, Hansraj Gupta Road, Greater Kailash-1",
+    addressLocality: "New Delhi",
+    addressRegion: "Delhi",
+    postalCode: "110048",
     addressLines: ["E-84, Hansraj Gupta Road", "Greater Kailash-1, New Delhi, Delhi 110048"],
     phoneDisplay: "+91 70441 07484",
     phoneTel: "+917044107484",
@@ -63,10 +71,14 @@ export const BRANCHES: Record<BranchSlug, BranchConfig> = {
     area: "Gurugram",
     location: "Gurugram",
     place: "Gurugram",
-    pageTitle: "Image Clinic — Gurugram | Best Hair & Skin Clinic in Gurugram",
+    pageTitle: "Hair & Skin Clinic in Gurugram",
     description:
       "Best hair and skin clinic in Gurugram for advanced treatment plans, skin care and hair restoration with expert-led care.",
     address: "Second Floor, A-14, 9, Golf Course Road, DLF Phase 2, Gurugram, Haryana 122002",
+    addressStreet: "Second Floor, A-14, 9, Golf Course Road, DLF Phase 2",
+    addressLocality: "Gurugram",
+    addressRegion: "Haryana",
+    postalCode: "122002",
     addressLines: ["Second Floor, A-14, 9, Golf Course Road", "DLF Phase 2, Gurugram, Haryana 122002"],
     phoneDisplay: "+91 88263 79666",
     phoneTel: "+918826379666",

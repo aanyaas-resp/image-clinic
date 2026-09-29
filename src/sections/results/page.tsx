@@ -53,14 +53,14 @@ export default function ResultsGrid({
               visibleResults.map((item) => (
                 <div
                   key={item.slug}
-                  className="group relative aspect-[4/5] overflow-hidden rounded-2xl shadow-[0_10px_30px_-8px_rgba(43,32,22,0.25)] ring-1 ring-inset ring-gold/10 transition-shadow duration-500 hover:shadow-[0_20px_45px_-12px_rgba(184,134,58,0.35)] sm:rounded-3xl"
+                  className="group relative aspect-square overflow-hidden rounded-2xl shadow-[0_10px_30px_-8px_rgba(43,32,22,0.25)] ring-1 ring-inset ring-gold/10 transition-shadow duration-500 hover:shadow-[0_20px_45px_-12px_rgba(184,134,58,0.35)] sm:rounded-3xl"
                 >
                   <Image
                     src={item.image}
                     alt={item.alt}
                     fill
                     sizes="(max-width: 640px) 46vw, (max-width: 1024px) 30vw, 24vw"
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    className="object-contain"
                     loading="lazy"
                   />
                   <div
