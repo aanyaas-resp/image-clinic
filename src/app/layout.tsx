@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingContactButtons from "@/components/FloatingContactButtons";
+import GurugramGtmNoscript from "@/components/GurugramGtmNoscript";
 
 // Cormorant Garamond — soft, candlelit serif for headings/logo type.
 const displayFont = Cormorant_Garamond({
@@ -128,6 +129,7 @@ export default function RootLayout({
         </Script>
       </head>
       <body>
+        <GurugramGtmNoscript />
         <Navbar />
         {children}
         <Footer />
