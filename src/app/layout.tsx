@@ -116,15 +116,15 @@ export default function RootLayout({
         />
 
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=AW-18375995180"
-          strategy="lazyOnload"
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18265778948"
+          strategy="afterInteractive"
         />
         <Script id="google-tag" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'AW-18375995180');
+            gtag('config', 'AW-18265778948');
           `}
         </Script>
       </head>

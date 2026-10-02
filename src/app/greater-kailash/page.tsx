@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { BRANCHES } from "@/data/branches";
 import BranchPage from "@/components/branch/BranchPage";
 
@@ -26,5 +27,14 @@ export const metadata: Metadata = {
 };
 
 export default function GreaterKailashPage() {
-  return <BranchPage branch={branch} />;
+  return (
+    <>
+      <Script id="google-ads-phone-conversion-greater-kailash" strategy="afterInteractive">
+        {`gtag('config', 'AW-18265778948/kAB5CIv9_o0dEITW5oVE', {
+          'phone_conversion_number': '+917044107484'
+        });`}
+      </Script>
+      <BranchPage branch={branch} />
+    </>
+  );
 }

@@ -107,11 +107,14 @@ export default function BranchContact({ branch }: { branch: BranchConfig }) {
                   <p className="font-sans text-sm font-semibold text-parchment">Call Us</p>
                   <a
                     href={`tel:${branch.phoneTel}`}
-                    {...(branch.slug === "gurugram"
+                    {...(branch.slug === "gurugram" || branch.slug === "greater-kailash"
                       ? {
                           onClick: () =>
                             window.gtag?.("event", "conversion", {
-                              send_to: "AW-18265778948/Lj4hCMSK7o0dEITW5oVE",
+                              send_to:
+                                branch.slug === "gurugram"
+                                  ? "AW-18265778948/Lj4hCMSK7o0dEITW5oVE"
+                                  : "AW-18265778948/kAB5CIv9_o0dEITW5oVE",
                             }),
                         }
                       : {})}
