@@ -375,7 +375,7 @@ export default function Services() {
             treatment across all categories — keeps full service coverage
             indexable without disturbing the tabbed UI. */}
         <div className="sr-only">
-          <h3>All treatments at Image Clinic, Kailash Garden, Gurugram, and Kolkata</h3>
+          <h3>All treatments at Image Clinic, Greater Kailash, and Gurugram</h3>
           <ul>
             {ALL_TREATMENTS.map((t) => (
               <li key={t.slug}>

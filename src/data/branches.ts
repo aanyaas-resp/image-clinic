@@ -129,6 +129,11 @@ export const BRANCHES: Record<BranchSlug, BranchConfig> = {
   },
 };
 
+export const ACTIVE_BRANCHES: BranchConfig[] = [
+  BRANCHES["greater-kailash"],
+  BRANCHES.gurugram,
+];
+
 /** Generic brand config used on the home page (both branches). */
 export const HOME_BRAND: BranchConfig = {
   ...BRANCHES["greater-kailash"],

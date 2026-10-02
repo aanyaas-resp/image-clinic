@@ -168,7 +168,6 @@ export default function Contact({ branch }: { branch?: BranchConfig }) {
                     >
                       <option value="greater-kailash">Greater Kailash</option>
                       <option value="gurugram">Gurugram</option>
-                      <option value="kolkata">Kolkata</option>
                     </select>
                     <ChevronDown className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-chocolate-deep/40" strokeWidth={1.75} />
                   </div>

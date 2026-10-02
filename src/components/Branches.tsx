@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, MapPin } from "lucide-react";
-import { BRANCHES } from "@/data/branches";
+import { ACTIVE_BRANCHES } from "@/data/branches";
 
 export default function Branches() {
   return (
@@ -10,11 +10,11 @@ export default function Branches() {
         <div className="mb-8 text-center sm:mb-10">
           <p className="eyebrow justify-center">Our Clinics</p>
           <h2 className="mt-2 font-display text-3xl font-semibold text-parchment sm:text-4xl">Find your nearest clinic</h2>
-          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-parchment/70 sm:text-base">Visit us in Greater Kailash, Gurugram or Kolkata. Get directions or explore each clinic page.</p>
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-parchment/70 sm:text-base">Visit us in Greater Kailash or Gurugram. Get directions or explore each clinic page.</p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
-          {Object.values(BRANCHES).map((branch) => (
+          {ACTIVE_BRANCHES.map((branch) => (
             <article
               key={branch.slug}
               className="group overflow-hidden rounded-[1.75rem] border border-gold/15 bg-smoke shadow-[0_18px_45px_-22px_rgba(43,32,22,0.3)] transition-transform duration-300 hover:-translate-y-1 hover:border-gold/30"

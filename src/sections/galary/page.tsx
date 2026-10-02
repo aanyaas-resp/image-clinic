@@ -20,7 +20,7 @@ const GALLERY: GalleryItem[] = [
   {
     slug: "reception",
     image: "/images/gallery-1.webp",
-    caption: "Image Clinic reception — visit us in Kailash Garden, Gurugram, or Kolkata to book your next appointment.",
+    caption: "Image Clinic reception — visit us in Greater Kailash or Gurugram to book your next appointment.",
   },
   {
     slug: "waiting-area",

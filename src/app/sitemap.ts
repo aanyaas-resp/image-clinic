@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { BRANCHES } from "@/data/branches";
+import { ACTIVE_BRANCHES } from "@/data/branches";
 
 const SITE_URL = new URL("https://www.imageclinicindia.co/");
 
@@ -10,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 1,
     },
-    ...Object.values(BRANCHES).map((branch) => ({
+    ...ACTIVE_BRANCHES.map((branch) => ({
       url: new URL(`/${branch.slug}`, SITE_URL).toString(),
       changeFrequency: "monthly" as const,
       priority: 0.8,
