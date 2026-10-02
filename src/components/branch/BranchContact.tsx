@@ -82,7 +82,7 @@ export default function BranchContact({ branch }: { branch: BranchConfig }) {
         </div>
 
         <div className="mt-14 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-14">
-          {/* Left: address, contact details, directions, map */}
+          {/* Left: address, contact details, directions and map */}
           <div ref={infoRef} className="flex flex-col gap-6">
             <div className="rounded-2xl border border-parchment/10 bg-smoke p-6 sm:p-7">
               <div className="flex items-start gap-4">
@@ -107,6 +107,14 @@ export default function BranchContact({ branch }: { branch: BranchConfig }) {
                   <p className="font-sans text-sm font-semibold text-parchment">Call Us</p>
                   <a
                     href={`tel:${branch.phoneTel}`}
+                    {...(branch.slug === "gurugram"
+                      ? {
+                          onClick: () =>
+                            window.gtag?.("event", "conversion", {
+                              send_to: "AW-18265778948/Lj4hCMSK7o0dEITW5oVE",
+                            }),
+                        }
+                      : {})}
                     className="mt-1 block font-sans text-sm text-parchment/65 transition-colors hover:text-gold"
                   >
                     {branch.phoneDisplay}
@@ -124,31 +132,34 @@ export default function BranchContact({ branch }: { branch: BranchConfig }) {
                 </div>
               </div>
 
-              <a
-                href={branch.directionsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-pill-solid group mt-7 inline-flex w-full items-center justify-center gap-2"
-              >
-                Get Directions
-                <ArrowUpRight
-                  className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  strokeWidth={2}
-                />
-              </a>
+              {branch.slug !== "kolkata" && (
+                <a
+                  href={branch.directionsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-pill-solid group mt-7 inline-flex w-full items-center justify-center gap-2"
+                >
+                  Get Directions
+                  <ArrowUpRight
+                    className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    strokeWidth={2}
+                  />
+                </a>
+              )}
             </div>
 
-            {/* Map embed */}
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl ring-1 ring-inset ring-parchment/10 sm:aspect-[16/10]">
-              <iframe
-                src={branch.mapEmbedSrc}
-                title={`Map showing the location of ${clinicName}`}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="h-full w-full"
-                style={{ border: 0 }}
-              />
-            </div>
+            {branch.slug !== "kolkata" && (
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl ring-1 ring-inset ring-parchment/10 sm:aspect-[16/10]">
+                <iframe
+                  src={branch.mapEmbedSrc}
+                  title={`Map showing the location of ${clinicName}`}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="h-full w-full"
+                  style={{ border: 0 }}
+                />
+              </div>
+            )}
           </div>
 
           {/* Right: contact form */}

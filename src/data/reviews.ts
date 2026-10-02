@@ -6,7 +6,7 @@ export type Review = {
 };
 
 // Google reviews shown on each branch page. Keyed by branch slug.
-export const REVIEWS: Record<"greater-kailash" | "gurugram", Review[]> = {
+export const REVIEWS: Record<"greater-kailash" | "gurugram" | "kolkata", Review[]> = {
   "greater-kailash": [
     {
       name: "Priya S.",
@@ -102,4 +102,5 @@ export const REVIEWS: Record<"greater-kailash" | "gurugram", Review[]> = {
         "Came in for microneedling and really enjoyed the clinic's vibe from start to finish — a great overall experience that's got me planning to return for more treatments.",
     },
   ],
+  kolkata: [],
 };

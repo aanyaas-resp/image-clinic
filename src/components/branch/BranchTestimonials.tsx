@@ -22,6 +22,7 @@ function initials(name: string) {
 
 export default function BranchTestimonials({ branch }: { branch: BranchConfig }) {
   const reviews = REVIEWS[branch.slug];
+  if (reviews.length === 0) return null;
   const sectionRef = useRef<HTMLElement>(null);
   const eyebrowRef = useRef<HTMLParagraphElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);

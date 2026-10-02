@@ -27,6 +27,7 @@ const QUICK_LINKS = [
   { label: "Home", href: "/" },
   { label: "Greater Kailash", href: "/greater-kailash" },
   { label: "Gurugram", href: "/gurugram" },
+  { label: "Kolkata", href: "/kolkata" },
   { label: "Services", href: "/#services" },
   { label: "Results", href: "/#results" },
   { label: "Gallery", href: "/#gallery" },
@@ -92,7 +93,7 @@ export default function Footer() {
               />
             </Link>
             <p className="mt-3 max-w-xs font-sans text-sm leading-relaxed text-parchment/65">
-              Advanced skin, hair and aesthetic care in Kailash Garden and Gurugram — expert-led, result-driven treatment plans.
+              Advanced skin, hair and aesthetic care in Kailash Garden, Gurugram and Kolkata — expert-led, result-driven treatment plans.
             </p>
             <div className="mt-5 flex items-center gap-3">
               {SOCIALS.map(({ label, href, icon: Icon }) => (

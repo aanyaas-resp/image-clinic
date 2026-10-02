@@ -37,7 +37,7 @@ const FAQS = [
   {
     question: "Where is the clinic located, and what are your hours?",
     answer:
-      "We're located in Kailash Garden, New Delhi, and Gurugram. For current operating hours and holiday schedules, please check our contact page or WhatsApp us directly — hours can shift around festivals and holidays.",
+      "We're located in Kailash Garden, New Delhi, Gurugram, and Kolkata. For the Kolkata clinic address, current operating hours, and holiday schedules, please contact us directly — hours can shift around festivals and holidays.",
   },
 ];
 

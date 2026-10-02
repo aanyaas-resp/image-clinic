@@ -1,8 +1,7 @@
 import type { MetadataRoute } from "next";
 import { BRANCHES } from "@/data/branches";
 
-// Keep sitemap URLs on the same canonical host used by metadata and robots.
-const SITE_URL = new URL("https://www.imageclinic.in");
+const SITE_URL = new URL("https://www.imageclinicindia.co/");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

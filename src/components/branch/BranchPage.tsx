@@ -12,10 +12,10 @@ export default function BranchPage({ branch }: { branch: BranchConfig }) {
   const branchJsonLd = {
     "@context": "https://schema.org",
     "@type": "MedicalClinic",
-    "@id": `https://www.imageclinic.in/${branch.slug}#clinic`,
+    "@id": `https://www.imageclinicindia.co/${branch.slug}#clinic`,
     name: `Image Clinic ${branch.area}`,
-    image: `https://www.imageclinic.in${branch.heroImage}`,
-    url: `https://www.imageclinic.in/${branch.slug}`,
+    image: `https://www.imageclinicindia.co${branch.heroImage}`,
+    url: `https://www.imageclinicindia.co/${branch.slug}`,
     telephone: branch.phoneTel,
     address: {
       "@type": "PostalAddress",

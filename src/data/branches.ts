@@ -1,4 +1,4 @@
-export type BranchSlug = "greater-kailash" | "gurugram";
+export type BranchSlug = "greater-kailash" | "gurugram" | "kolkata";
 
 export type BranchConfig = {
   slug: BranchSlug;
@@ -96,6 +96,36 @@ export const BRANCHES: Record<BranchSlug, BranchConfig> = {
     heroAlt: "Image Clinic — clinic exterior in Gurugram",
     resultImage: "/result/result-7.webp",
     resultAlt: "Before and after skin treatment results at Image Clinic, Gurugram",
+  },
+  kolkata: {
+    slug: "kolkata",
+    name: "Image Clinic",
+    area: "Kolkata",
+    location: "Kolkata",
+    place: "Kolkata",
+    pageTitle: "Hair & Skin Clinic in Kolkata",
+    description:
+      "Advanced hair, skin and aesthetic treatments at Image Clinic in Kolkata. Call or WhatsApp us to book a consultation.",
+    address: "Clinic address to be announced, Kolkata, West Bengal",
+    addressStreet: "Kolkata",
+    addressLocality: "Kolkata",
+    addressRegion: "West Bengal",
+    postalCode: "",
+    addressLines: ["Clinic address to be announced", "Kolkata, West Bengal"],
+    phoneDisplay: "+91 98308 36666",
+    phoneTel: "+919830836666",
+    whatsapp: "919830836666",
+    hours: "Mon – Sun: 10:00 AM – 8:00 PM",
+    mapsLink: "",
+    directionsUrl: "https://www.google.com/maps/dir/?api=1&destination=Kolkata%2C%20West%20Bengal",
+    mapEmbedSrc: "https://www.google.com/maps?q=Kolkata%2C%20West%20Bengal&output=embed",
+    googleReviewsUrl: "",
+    reviewRating: "",
+    heroBadge: "Now serving Kolkata",
+    heroImage: "/images/kolkata.webp",
+    heroAlt: "Image Clinic serving Kolkata",
+    resultImage: "/result/result-7.webp",
+    resultAlt: "Before and after skin treatment results at Image Clinic",
   },
 };
 

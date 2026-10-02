@@ -22,8 +22,12 @@ const GLASS_SHADOW =
 
 export default function BranchHero({ branch }: { branch: BranchConfig }) {
   const badges = [
-    { icon: Star, label: "4.9/5 Google Reviews" },
-    { icon: ShieldCheck, label: "700+ Happy Clients" },
+    ...(branch.slug === "kolkata"
+      ? []
+      : [
+          { icon: Star, label: "4.9/5 Google Reviews" },
+          { icon: ShieldCheck, label: "700+ Happy Clients" },
+        ]),
     { icon: Award, label: branch.heroBadge },
   ];
   const clinicName = `${branch.name} — ${branch.area}`;
@@ -88,6 +92,14 @@ export default function BranchHero({ branch }: { branch: BranchConfig }) {
             </a>
             <a
               href={`tel:${branch.phoneTel}`}
+              {...(branch.slug === "gurugram"
+                ? {
+                    onClick: () =>
+                      window.gtag?.("event", "conversion", {
+                        send_to: "AW-18265778948/Lj4hCMSK7o0dEITW5oVE",
+                      }),
+                  }
+                : {})}
               aria-label="Call the clinic"
               className={`inline-flex items-center justify-center gap-2 rounded-full border border-white/40 bg-gradient-to-b from-white/30 to-white/10 px-5 py-2.5 text-[13px] font-semibold text-white backdrop-blur-xl backdrop-saturate-150 transition duration-300 hover:-translate-y-0.5 hover:from-white/40 hover:to-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 ${GLASS_SHADOW}`}
             >

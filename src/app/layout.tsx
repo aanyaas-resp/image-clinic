@@ -30,7 +30,7 @@ const accentFont = Italiana({
   display: "swap",
 });
 
-const SITE_URL = "https://www.imageclinic.in/";
+const SITE_URL = "https://www.imageclinicindia.co/";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     template: "%s | Image Clinic",
   },
   description:
-    "Doctor-led hair, skin and aesthetic treatments at Image Clinic in Greater Kailash, Delhi and Gurugram. Explore services, real results and clinic locations.",
+    "Doctor-led hair, skin and aesthetic treatments at Image Clinic in Greater Kailash, Delhi, Gurugram and Kolkata. Explore services, real results and clinic locations.",
   keywords: [
     "Image Clinic",
     "hair clinic Kailash Garden",
@@ -62,9 +62,9 @@ export const metadata: Metadata = {
     apple: "/images/image_clinic_logo-1.webp",
   },
   openGraph: {
-    title: "Image Clinic | Hair & Skin Clinic in Delhi and Gurugram",
+    title: "Image Clinic | Hair & Skin Clinic in Delhi, Gurugram and Kolkata",
     description:
-      "Doctor-led hair, skin and aesthetic treatments at Image Clinic in Greater Kailash, Delhi and Gurugram.",
+      "Doctor-led hair, skin and aesthetic treatments at Image Clinic in Greater Kailash, Delhi, Gurugram and Kolkata.",
     url: SITE_URL,
     siteName: "Image Clinic",
     images: ["/opengraph-image"],
@@ -74,9 +74,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Image Clinic | Hair & Skin Clinic in Delhi and Gurugram",
+    title: "Image Clinic | Hair & Skin Clinic in Delhi, Gurugram and Kolkata",
     description:
-      "Doctor-led hair, skin and aesthetic treatments at Image Clinic in Greater Kailash, Delhi and Gurugram.",
+      "Doctor-led hair, skin and aesthetic treatments at Image Clinic in Greater Kailash, Delhi, Gurugram and Kolkata.",
     images: ["/opengraph-image"],
   },
   robots: {

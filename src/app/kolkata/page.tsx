@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { BRANCHES } from "@/data/branches";
 import BranchPage from "@/components/branch/BranchPage";
 
-const branch = BRANCHES["greater-kailash"];
+const branch = BRANCHES.kolkata;
 
 export const metadata: Metadata = {
   title: branch.pageTitle,
@@ -25,6 +25,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default function GreaterKailashPage() {
+export default function KolkataPage() {
   return <BranchPage branch={branch} />;
 }

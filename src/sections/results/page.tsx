@@ -40,7 +40,7 @@ export default function ResultsGrid({
               Our <span className="accent-italic">Results</span>
             </h2>
             <p className="mt-3 font-sans text-sm leading-relaxed text-parchment/70 sm:mt-4 sm:text-base">
-              A snapshot of real transformations from Image Clinic in Kailash Garden and Gurugram. For the full collection, follow along on Instagram.
+              A snapshot of real transformations from Image Clinic in Kailash Garden, Gurugram, and Kolkata. For the full collection, follow along on Instagram.
             </p>
           </div>
 

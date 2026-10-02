@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Image Clinic, hair and skin care in Delhi and Gurugram";
+export const alt = "Image Clinic, hair and skin care in Delhi, Gurugram, and Kolkata";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -35,10 +35,10 @@ export default function OpenGraphImage() {
           Hair, skin &amp; aesthetic care
         </div>
         <div style={{ display: "flex", marginTop: 26, fontSize: 32, color: "#66564b" }}>
-          Greater Kailash, Delhi · Gurugram
+          Greater Kailash, Delhi · Gurugram · Kolkata
         </div>
         <div style={{ display: "flex", marginTop: 54, fontSize: 24, color: "#86672b" }}>
-          www.imageclinic.in
+          www.imageclinicindia.co
         </div>
       </div>
     ),

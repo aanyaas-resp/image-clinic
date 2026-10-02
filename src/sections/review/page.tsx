@@ -142,7 +142,7 @@ export default function Reviews({
             Aesthetic Reviews on <span className="accent-italic">Google</span>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-chocolate-deep/70">
-            Real feedback from happy clients at Image Clinic in Kailash Garden and Gurugram.
+            Real feedback from happy clients at Image Clinic in Kailash Garden, Gurugram, and Kolkata.
           </p>
         </div>
 
